@@ -1,15 +1,12 @@
-public class Recursion{
+public class Recursion implements hw01{
 
 
-    //REMEMBER TO REMOVE ALL STATIC!!!!!!!!!!!!!!!!!!!!
-
-
-    public static String name(){
+    public String name(){
 	return "Chen,Yuxuan";
     }
 
     
-    public static double sqrt(double n){
+    public double sqrt(double n){
 	//throw exception when n is negative
 	if(n<0){
 	    throw new IllegalArgumentException();
@@ -17,24 +14,14 @@ public class Recursion{
 	return sqrt_helper(n,n/2);
     }
 
-    public static double sqrt_helper(double n, double guess){
+    public double sqrt_helper(double n, double guess){
 	//exit case: percentage error less than .001%
 	if((Math.abs(Math.pow(guess,2)-n)/n)*100 <0.001){
 	    return guess;
 	}
+	//update guess
 	guess = (n/guess + guess)/2;
 	return sqrt_helper(n,guess);
-    }
-
-
-    public static void main(String[]args){
-	try{
-	    sqrt(-1);
-	}catch(IllegalArgumentException e){
-	    System.out.println("caught!");
-	}
-	System.out.println(name());
-	System.out.println(sqrt(100));
     }
 
 
