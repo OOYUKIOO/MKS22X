@@ -33,6 +33,7 @@ public class nqueen{
 	board[row][col] = 0;
     }
 
+
     //for testing purpose
     public String chessboard(){
 	String visual = "";
