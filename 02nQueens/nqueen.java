@@ -12,30 +12,53 @@ public class nqueen{
 
 
     //add queen
-    public void addQueen(int row, int col){
- 	for(int pcol = 0; pcol < size; pcol++){
-	    board[row][pcol] = board[row][pcol]-1;
-	}
-	for(int prow = 0; prow < size; prow++){
-	    board[prow][col] = board[prow][col]-1;
+    public boolean addQueen(int row, int col){
+	if(board[row][col] != 0){
+	    return false;
 	}
 	board[row][col] = 1;
+	col++;
+	int offset = 1;
+	while(col < board[row].length){
+	    board[row][col]--;
+	    if(row - offset >= 0){
+		board[row-offset][col]--;
+	    }
+	    if(row + offset < board.length){
+		board[row+offset][col]--;
+	    }
+	    col++;
+	    offset++;
+	}
+	return true;
     }
 
+
     //remove queen
-    public void removeQueen(int row, int col){
-	for(int pcol = 0; pcol < size; pcol++){
-	    board[row][pcol] = board[row][pcol]+1;
-	}
-	for (int prow = 0; prow < size; prow++){
-	    board[prow][col] = board[prow][col]+1;
+  public boolean removeQueen(int row, int col){
+	if(board[row][col] != 1){
+	    return false;
 	}
 	board[row][col] = 0;
+	col++;
+	int offset = 1;
+	while(col < board[row].length){
+	    board[row][col]++;
+	    if(row - offset >= 0){
+		board[row-offset][col]++;
+	    }
+	    if(row + offset < board.length){
+		board[row+offset][col]++;
+	    }
+	    col++;
+	    offset++;
+	}
+	return true;
     }
 
 
     //for testing purpose
-    public String chessboard(){
+    public String toString(){
 	String visual = "";
 	for(int row = 0; row < size; row++){
 	    for (int col = 0; col < size; col++){
@@ -48,6 +71,7 @@ public class nqueen{
 
 
     //test
+    /*
     public static void main(String[]args){
 	nqueen x = new nqueen(4);
 	String a = x.chessboard();
@@ -65,6 +89,16 @@ public class nqueen{
 	String d = x.chessboard();
 	System.out.println(d);
     }
+    */
 
+public static void main(String[]args){
+	nqueen b = new nqueen(5);
+        System.out.println(b);
+	b.addQueen(3,0);
+	b.addQueen(0,1);
+        System.out.println(b);
+	b.removeQueen(3,0);
+        System.out.println(b);
+}
 
 }
