@@ -10,15 +10,16 @@ public class nqueen{
 	board = new int[size][size];
     }
 
-    //returns value for size
-    public int getSize(){
-	return size;
-    }
-
 
     //add queen
     public void addQueen(int row, int col){
-
+	for(int pcol = 0; pcol < size; pcol++){
+	    board[row][pcol] = board[row][pcol]-1;
+	}
+	for(int prow = 0; prow < size; prow++){
+	    board[prow][col] = board[prow][col]-1;
+	}
+	board[row][col] = 1;
     }
 
     //for testing purpose
@@ -38,6 +39,9 @@ public class nqueen{
 	nqueen x = new nqueen(4);
 	String a = x.chessboard();
 	System.out.println(a);
+	x.addQueen(0,2);
+	String b = x.chessboard();
+	System.out.println(b);
     }
 
 
