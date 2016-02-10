@@ -45,6 +45,7 @@ public class nqueen{
 	return visual;
     }
 
+
     //test
     public static void main(String[]args){
 	nqueen x = new nqueen(4);
