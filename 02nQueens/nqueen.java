@@ -57,6 +57,40 @@ public class nqueen{
     }
 
 
+    public boolean solved(){
+	return solvedHelper(0,0);
+    }
+
+    public boolean solvedHelper(int row, int col){
+	/*
+	if(row == size){
+	    return false;
+	}
+	if(row == size-1){
+	    return (addQueen(row,col) || solvedHelper(row,col++));
+	}
+	if(col == size){
+	    row ++;
+	    col = 0;
+	}
+	if(addQueen(row,col) || solvedHelper(row,col++)){
+	    return solvedHelper(row++,0);
+	}else{
+	    if(removeQueen(row--,col)){
+		return solvedHelper(row--,col++);
+	    }
+	}
+	*/
+	return false;
+    }
+
+    /*
+    public boolean solvedHelperH(int col){
+	    
+	}
+    */
+
+
     //for testing purpose
     public String toString(){
 	String visual = "";
@@ -70,35 +104,16 @@ public class nqueen{
     }
 
 
-    //test
-    /*
-    public static void main(String[]args){
-	nqueen x = new nqueen(4);
-	String a = x.chessboard();
-	System.out.println(a);
-
-	x.addQueen(0,2);
-	String b = x.chessboard();
-	System.out.println(b);
-
-	x.addQueen(2,3);
-	String c = x.chessboard();
-	System.out.println(c);
-
-	x.removeQueen(2,3);
-	String d = x.chessboard();
-	System.out.println(d);
-    }
-    */
-
 public static void main(String[]args){
-	nqueen b = new nqueen(5);
+	nqueen b = new nqueen(2);
         System.out.println(b);
-	b.addQueen(3,0);
+	b.addQueen(1,0);
 	b.addQueen(0,1);
         System.out.println(b);
-	b.removeQueen(3,0);
+	b.removeQueen(1,0);
         System.out.println(b);
+	System.out.println(b.solved());
+
 }
 
 }
