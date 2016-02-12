@@ -67,6 +67,9 @@ public class QueenBoard{
 	}
 	for(int row = 0; row < size; row ++){
 	    if(addQueen(row,col)){
+
+		printSolution();
+
 		solveHelper(col+1);
 	    }
 	    if(col == 0){
@@ -79,10 +82,22 @@ public class QueenBoard{
 		solveHelper(col-1);
 	    }
 	}
+	return false;
     }
 
     public void printSolution(){
-
+	String chessBoard = "";
+	for(int row = 0; row < size; row++){
+	    for(int col = 0; col < size; col++){
+		if(board[row][col] <= 0){
+		    chessBoard+="_ ";
+		}else{
+		    chessBoard +="Q ";
+		}
+	    }
+	    chessBoard+="\n";
+	}
+	System.out.println(chessBoard);
     }
 
     //for testing purpose
@@ -99,7 +114,7 @@ public class QueenBoard{
 
 
 public static void main(String[]args){
-	QueenBoard b = new QueenBoard(2);
+	QueenBoard b = new QueenBoard(5);
         System.out.println(b);
 	b.addQueen(1,0);
 	b.addQueen(0,1);
