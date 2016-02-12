@@ -76,6 +76,7 @@ public class QueenBoard{
 		printSolution();
 		return solveHelper(col+1);
 	    }
+	    /*
 	    if(row == size-1){
 		while(!removeQueen(row,col)){
 		    row --;
@@ -83,6 +84,8 @@ public class QueenBoard{
 		printSolution();
 		return solveHelper(col-1);
 	    }
+	    */
+	    removeQueen(row,col);
 	    if(col == 0){
 		return false;
 	    }
@@ -120,7 +123,7 @@ public class QueenBoard{
 
 
 public static void main(String[]args){
-	QueenBoard b = new QueenBoard(6);
+	QueenBoard b = new QueenBoard(9);
         System.out.println(b);
 	b.addQueen(1,0);
 	b.addQueen(0,1);
