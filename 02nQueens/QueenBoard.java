@@ -62,7 +62,10 @@ public class QueenBoard{
     }
 
     public boolean solveHelper(int col){
-	if(col == size){
+	if(col >= size){
+	    printSolution();
+	    System.out.println(col);
+	    System.out.println(size);
 	    return true;
 	}
 	for(int row = 0; row < size; row ++){
@@ -76,9 +79,10 @@ public class QueenBoard{
 		return false;
 	    }
 	    if(row == size-1){
-		while(!removeQueen(row,col-1)){
+		while(!removeQueen(row,col)){
 		    row --;
 		}
+		printSolution();
 		solveHelper(col-1);
 	    }
 	}
