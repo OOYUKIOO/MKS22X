@@ -62,29 +62,31 @@ public class QueenBoard{
     }
 
     public boolean solveHelper(int col){
-	if(col >= size){
-	    printSolution();
-	    System.out.println(col);
-	    System.out.println(size);
-	    return true;
+	if(col == size){
+	    for(int i = 0; i < size; i++){
+		if(board[i][col-1] == 1){
+		    return true;
+		}
+	    }
+	    return false;
 	}
 	for(int row = 0; row < size; row ++){
 	    if(addQueen(row,col)){
 
 		printSolution();
-
-		solveHelper(col+1);
-	    }
-	    if(col == 0){
-		return false;
+		return solveHelper(col+1);
 	    }
 	    if(row == size-1){
 		while(!removeQueen(row,col)){
 		    row --;
 		}
 		printSolution();
-		solveHelper(col-1);
+		return solveHelper(col-1);
 	    }
+	    if(col == 0){
+		return false;
+	    }
+
 	}
 	return false;
     }
@@ -118,7 +120,7 @@ public class QueenBoard{
 
 
 public static void main(String[]args){
-	QueenBoard b = new QueenBoard(5);
+	QueenBoard b = new QueenBoard(6);
         System.out.println(b);
 	b.addQueen(1,0);
 	b.addQueen(0,1);
