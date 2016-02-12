@@ -85,11 +85,15 @@ public class QueenBoard{
 		return solveHelper(col-1);
 	    }
 	    */
-	    removeQueen(row,col);
+	    // removeQueen(row,col);
 	    if(col == 0){
 		return false;
 	    }
-
+	}
+	for(int row = 0; row < size; row++){
+	    if(removeQueen(row,col-1)){
+		return solveHelper(col-1);
+	    }
 	}
 	return false;
     }
@@ -123,7 +127,7 @@ public class QueenBoard{
 
 
 public static void main(String[]args){
-	QueenBoard b = new QueenBoard(9);
+	QueenBoard b = new QueenBoard(8);
         System.out.println(b);
 	b.addQueen(1,0);
 	b.addQueen(0,1);
