@@ -39,7 +39,7 @@ public class QueenBoard{
 	if(board[row][col] != 1){
 	    return false;
 	}
-	board[row][col] = 0;
+	board[row][col] = -1;
 	col++;
 	int offset = 1;
 	while(col < board[row].length){
@@ -61,19 +61,24 @@ public class QueenBoard{
 	return solveHelper(0);
     }
 
-    public boolean solveHelper(int row){
-	if(row == size){
-	    return false;
+    public boolean solveHelper(int col){
+	if(col == size){
+	    return true;
 	}
-	int col = 0;
-	while(col<size){
+	for(int row = 0; row < size; row ++){
 	    if(addQueen(row,col)){
-		solveHelper(row++);
-	    }else{
-		col++;
+		solveHelper(col+1);
+	    }
+	    if(col == 0){
+		return false;
+	    }
+	    if(row == size-1){
+		while(!removeQueen(row,col-1)){
+		    row --;
+		}
+		solveHelper(col-1);
 	    }
 	}
-	return false;
     }
 
     public void printSolution(){
