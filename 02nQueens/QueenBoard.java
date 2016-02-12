@@ -58,7 +58,12 @@ public class QueenBoard{
 
 
     public boolean solve(){
-	return solveHelper(0);
+	if(solveHelper(0)){
+	    printSolution();
+	    return true;
+	}else{
+	    return false;
+	}
     }
 
     public boolean solveHelper(int col){
@@ -73,19 +78,9 @@ public class QueenBoard{
 	for(int row = 0; row < size; row ++){
 	    if(addQueen(row,col)){
 
-		printSolution();
+		//printSolution();
 		return solveHelper(col+1);
 	    }
-	    /*
-	    if(row == size-1){
-		while(!removeQueen(row,col)){
-		    row --;
-		}
-		printSolution();
-		return solveHelper(col-1);
-	    }
-	    */
-	    // removeQueen(row,col);
 	    if(col == 0){
 		return false;
 	    }
@@ -127,15 +122,12 @@ public class QueenBoard{
 
 
 public static void main(String[]args){
-	QueenBoard b = new QueenBoard(8);
-        System.out.println(b);
-	b.addQueen(1,0);
-	b.addQueen(0,1);
-        System.out.println(b);
-	b.removeQueen(1,0);
-        System.out.println(b);
-	System.out.println(b.solve());
-
+    /* For testing
+    for(int i = 0; i < 20; i++){
+	QueenBoard a = new QueenBoard(i);
+	System.out.println(""+i+"  \n"+a.solve());
+    }
+    */
 }
 
 }
