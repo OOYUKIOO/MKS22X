@@ -2,12 +2,17 @@ public class QueenBoard{
 
     //variable
     int size;
+    int[]queens;
     int[][] board;
 
     //constructor
     public QueenBoard(int size){
 	this.size = size;
 	board = new int[size][size];
+	queens = new int[size];
+	for(int i = 0; i < size; i++){
+	    queens[i] = -1;
+	}
     }
 
 
@@ -17,19 +22,18 @@ public class QueenBoard{
 	    return false;
 	}
 	board[row][col] = 1;
-	col++;
-	int offset = 1;
-	while(col < board[row].length){
-	    board[row][col]--;
+       	int offset = 1;
+	while(col+offset < size){
+	    board[row][col+offset]--;
 	    if(row - offset >= 0){
-		board[row-offset][col]--;
+		board[row-offset][col+offset]--;
 	    }
 	    if(row + offset < board.length){
-		board[row+offset][col]--;
+		board[row+offset][col+offset]--;
 	    }
-	    col++;
 	    offset++;
 	}
+	queens[col] = row;
 	return true;
     }
 
@@ -40,19 +44,18 @@ public class QueenBoard{
 	    return false;
 	}
 	board[row][col] = -1;
-	col++;
 	int offset = 1;
-	while(col < board[row].length){
-	    board[row][col]++;
+	while(col + offset < size){
+	    board[row][col+offset]++;
 	    if(row - offset >= 0){
-		board[row-offset][col]++;
+		board[row-offset][col+offset]++;
 	    }
 	    if(row + offset < board.length){
-		board[row+offset][col]++;
+		board[row+offset][col+offset]++;
 	    }
-	    col++;
 	    offset++;
 	}
+	queens[col] = -1;
 	return true;
     }
 
@@ -67,6 +70,7 @@ public class QueenBoard{
     }
 
     public boolean solveHelper(int col){
+	/*
 	if(col == size){
 	    for(int i = 0; i < size; i++){
 		if(board[i][col-1] == 1){
@@ -77,8 +81,6 @@ public class QueenBoard{
 	}
 	for(int row = 0; row < size; row ++){
 	    if(addQueen(row,col)){
-
-		//printSolution();
 		return solveHelper(col+1);
 	    }
 	    if(col == 0){
@@ -88,6 +90,21 @@ public class QueenBoard{
 	for(int row = 0; row < size; row++){
 	    if(removeQueen(row,col-1)){
 		return solveHelper(col-1);
+	    }
+	}
+	return false;
+	*/
+	if (col >= size) {
+	    return true;
+	}
+	for (int row = 0; row < size; row++) {
+	    if (board[row][col]==0){
+		addQueen(row,col);
+		if (solveHelper(col+1)) {
+		    return true;
+		}else{
+		    removeQueen(queens[col],col);
+		}
 	    }
 	}
 	return false;
@@ -122,12 +139,12 @@ public class QueenBoard{
 
 
 public static void main(String[]args){
-    /* For testing
+    // For testing
     for(int i = 0; i < 20; i++){
 	QueenBoard a = new QueenBoard(i);
 	System.out.println(""+i+"  \n"+a.solve());
     }
-    */
+    
 }
 
 }
