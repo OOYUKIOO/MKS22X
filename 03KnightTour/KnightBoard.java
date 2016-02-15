@@ -21,8 +21,34 @@ public class KnightBoard{
 
     //helper function
     public boolean solveHelper(int row, int col, int move){
+	if(board[row][col] != -1){
+	    return false;
+	}
+	if(row<0 || row>= board.length || col<0 || col>=board[row].length){
+	    return false;
+	}
+	if(move == (board.length * board[row].length - 1)){
+	    board[row][col] = move;
+	    return (board[row][col] == -1);
+	}else{
+	    board[row][col] = move;
+	    boolean temp = false;
+	    temp = temp || solveHelper(row+1,col+2,move+1);
+	    temp = temp || solveHelper(row+1,col-2,move+1);
+	    temp = temp || solveHelper(row-1,col+2,move+1);
+	    temp = temp || solveHelper(row-1,col-2,move+1);
+	    temp = temp || solveHelper(row+2,col+1,move+1);
+	    temp = temp || solveHelper(row+2,col-1,move+1);
+	    temp = temp || solveHelper(row-2,col+1,move+1);
+	    temp = temp || solveHelper(row-2,col-1,move+1);
 
-	return false;
+	    if(temp){
+		return true;
+	    }else{
+		board[row][col] = -1;
+		return false;
+	    }
+	}
     }
 
     public void printSolution(){
@@ -38,7 +64,8 @@ public class KnightBoard{
 
     //testing
     public static void main(String[]args){
-	KnightBoard a = new KnightBoard(3);
+	KnightBoard a = new KnightBoard(5);
+	a.solve();
 	a.printSolution();
     }
 
