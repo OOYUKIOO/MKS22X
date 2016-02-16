@@ -4,8 +4,8 @@ public class KnightBoard{
 
 
     //constructor
-    public KnightBoard(int size){
-	board = new int[size][size];
+    public KnightBoard(int cols, int rows){
+	board = new int[cols][rows];
 	//initial all to -1, unvisitied
 	for(int row = 0; row < board.length; row++){
 	    for (int col = 0; col < board[row].length; col++){
@@ -57,7 +57,10 @@ public class KnightBoard{
 	String visual = "";
 	for(int row = 0; row < board.length; row++){
 	    for(int col = 0; col < board[row].length; col++){
-		visual += board[row][col]+" ";
+		if(board[row][col] < 10){
+		    visual += "_";
+		}
+		visual+= board[row][col]+" ";
 	    }
 	    visual += "\n";
 	}
@@ -66,7 +69,7 @@ public class KnightBoard{
 
     //testing
     public static void main(String[]args){
-	KnightBoard a = new KnightBoard(6);
+	KnightBoard a = new KnightBoard(5,6);
 	a.solve();
 	a.printSolution();
     }
