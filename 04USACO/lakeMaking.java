@@ -30,7 +30,6 @@ public class lakeMaking{
 	for (int x = 0; x < commands.length; x++){
 	    commands[x] = input.nextInt();
 	}
-	System.out.println(commands);
     }
 
     //stomping!
@@ -95,9 +94,11 @@ public class lakeMaking{
     //testing
     public static void main(String[]args){
 	lakeMaking x = new lakeMaking();
+	
 	System.out.println(x);
 	x.timeToStomp();
 	System.out.println(x);
+	
 	System.out.println(x.calcCubics());
     }
 
