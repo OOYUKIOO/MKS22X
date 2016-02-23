@@ -6,7 +6,7 @@ public class lakeMaking{
     int depth;
     int N;
     int[][] heights;
-    int[][] commands;
+    int[] commands;
     Scanner input;
 
     //read in file input
@@ -26,11 +26,9 @@ public class lakeMaking{
 		heights[prow][pcol] = input.nextInt();
 	    }
 	}
-	commands = new int[N][3];
-	for (int x = 0; x < N; x++){
-	    for(int y = 0; y < 3; y++){
-		commands[x][y] = input.nextInt();
-	    }
+	commands = new int[N*3];
+	for (int x = 0; x < commands.length; x++){
+	    commands[x] = input.nextInt();
 	}
 	System.out.println(commands);
     }
@@ -57,6 +55,14 @@ public class lakeMaking{
 	}
     }
 
+    //stomp according to input
+    public void timeToStomp(){
+	for(int i = 0; i < N; i++){
+	    stomp(commands[3*i],commands[3*i+1],commands[3*i+2]);
+	}
+    }
+
+
     //print out array
     public String toString(){
 	String output = "";
@@ -74,7 +80,7 @@ public class lakeMaking{
     public static void main(String[]args){
 	lakeMaking x = new lakeMaking();
 	System.out.println(x);
-	x.stomp(2,1,3);
+	x.timeToStomp();
 	System.out.println(x);
     }
 
