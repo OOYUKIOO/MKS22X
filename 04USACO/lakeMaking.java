@@ -35,6 +35,28 @@ public class lakeMaking{
 	System.out.println(commands);
     }
 
+    //stomping!
+    public void stomp(int x, int y, int dep){
+	if (x <= 0 || x > row - 2 || y <= 0 || y > col - 2){
+	    System.out.println ("Out of stomping range");
+	}else{
+	    int highest = Integer.MIN_VALUE;
+	    for(int row = x - 1; row < x + 2; row++){
+		for(int col = y - 1; col < y +2; col++){
+		    highest = Math.max(highest, heights[row][col]);
+		}
+	    }
+	    int newGround = highest - dep;
+	    for(int row = x - 1; row < x + 2; row ++){
+		for (int col = y - 1; col < y + 2; col ++){
+		    if(heights[row][col] > newGround){
+			heights[row][col] = newGround;
+		    }
+		}
+	    }
+	}
+    }
+
     //print out array
     public String toString(){
 	String output = "";
@@ -51,6 +73,8 @@ public class lakeMaking{
     //testing
     public static void main(String[]args){
 	lakeMaking x = new lakeMaking();
+	System.out.println(x);
+	x.stomp(2,1,3);
 	System.out.println(x);
     }
 
