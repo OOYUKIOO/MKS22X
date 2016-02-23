@@ -55,6 +55,22 @@ public class lakeMaking{
 	}
     }
 
+    //fill water
+    public int calcCubics(){
+	int cubics = 0;
+	for (int row = 0; row < heights.length; row ++){
+	    for (int col = 0; col < heights[row].length; col ++){
+		heights[row][col] = heights[row][col] - depth;
+		if (heights[row][col] < 0){
+		    cubics += heights[row][col] * -1;
+		}
+	    }
+	}
+	cubics = cubics * 72 * 72;
+	return cubics;
+    }
+
+
     //stomp according to input
     public void timeToStomp(){
 	for(int i = 0; i < N; i++){
@@ -82,6 +98,7 @@ public class lakeMaking{
 	System.out.println(x);
 	x.timeToStomp();
 	System.out.println(x);
+	System.out.println(x.calcCubics());
     }
 
 
