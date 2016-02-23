@@ -12,7 +12,7 @@ public class lakeMaking{
     //read in file input
     public lakeMaking(){
 	try{
-	    input = new Scanner(new File("input.txt"));
+	    input = new Scanner(new File("makelake.in"));
 	}catch(FileNotFoundException e){
 	    System.out.println("Input file does not exist!");
 	}
@@ -95,11 +95,11 @@ public class lakeMaking{
     public static void main(String[]args){
 	lakeMaking x = new lakeMaking();
 	
-	System.out.println(x);
+	//	System.out.println(x);
 	x.timeToStomp();
-	System.out.println(x);
+	//	System.out.println(x);
 	
-	System.out.println(x.calcCubics());
+	System.out.println(x.calcCubics()+", 6, Chen, Yuxuan");
     }
 
 
