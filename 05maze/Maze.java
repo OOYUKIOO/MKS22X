@@ -27,11 +27,20 @@ public class Maze{
 	Scanner x;
 	try{
 	    x = new Scanner(new File(filename));
+	    //find out width and length of maze
+	    int row = 0;
+	    int col = 0;
+	    while(x.hasNextLine()){
+		row ++;
+		String rowElements = x.nextLine();
+		col = rowElements.length();
+	}
+
 	}catch(FileNotFoundException e){
 	    System.out.println("Input file is not found!");
 	    System.exit(0);
 	}
-	//find out width and length of maze
+
     }
 
 
