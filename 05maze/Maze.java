@@ -21,6 +21,17 @@ public class Maze{
     */
     public Maze(String filename, boolean ani){
         //COMPLETE CONSTRUCTOR
+	animate = ani;
+	startx = -1;
+	starty = -1;
+	Scanner x;
+	try{
+	    x = new Scanner(new File(filename));
+	}catch(FileNotFoundException e){
+	    System.out.println("Input file is not found!");
+	    System.exit(0);
+	}
+	//find out width and length of maze
     }
 
 
