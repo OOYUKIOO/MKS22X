@@ -2,8 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class Maze{
-
-
     private char[][]maze;
     private int startx,starty;
     private boolean animate;
@@ -20,13 +18,13 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
-        //COMPLETE CONSTRUCTOR
 	animate = ani;
 	startx = -1;
 	starty = -1;
-	//find out width and length of maze
+	//find row & col of maze
 	int row = 0;
 	int col = 0;
+	String preMaze = "";
 	Scanner x = new Scanner("");
 	try{
 	    x = new Scanner(new File(filename));
@@ -34,27 +32,20 @@ public class Maze{
 		row ++;
 		String rowElements = x.nextLine();
 		col = rowElements.length();
+		//		System.out.println(rowElements);
+		preMaze+= rowElements;
 	    }
 	}catch(FileNotFoundException e){
 	    System.out.println("Input file is not found!");
 	    System.exit(0);
 	}
-		maze = new char[row][col];
-		/*
-		for(int prow = 0; prow < maze.length; prow ++){
-		    for (int pcol = 0; pcol < maze[prow].length; pcol++){
-			maze[prow][pcol] = x.next();
-		    }
-		}
-		*/
-		int prow = -1;
-		if(x.hasNextLine()){
-		    prow ++;
-		    Scanner y = new Scanner(x.nextLine());
-		    for(int i = 0; i < maze[0].length; i++){
-			maze[prow][i] = (char)y.next();
-		    }
-		}
+	maze = new char[row][col];
+	//	System.out.println(preMaze);
+	for(int x = 0; x < maze.length; x++){
+	    for(int y = 0; y < maze[x].length; y++){
+		maze[x][y] = preMaze.charAt(x*maze.length+y);
+	    }
+	}
 
     }
 
