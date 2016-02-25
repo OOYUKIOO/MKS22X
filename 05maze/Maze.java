@@ -24,22 +24,37 @@ public class Maze{
 	animate = ani;
 	startx = -1;
 	starty = -1;
-	Scanner x;
+	//find out width and length of maze
+	int row = 0;
+	int col = 0;
+	Scanner x = new Scanner("");
 	try{
 	    x = new Scanner(new File(filename));
-	    //find out width and length of maze
-	    int row = 0;
-	    int col = 0;
 	    while(x.hasNextLine()){
 		row ++;
 		String rowElements = x.nextLine();
 		col = rowElements.length();
-	}
-
+	    }
 	}catch(FileNotFoundException e){
 	    System.out.println("Input file is not found!");
 	    System.exit(0);
 	}
+		maze = new char[row][col];
+		/*
+		for(int prow = 0; prow < maze.length; prow ++){
+		    for (int pcol = 0; pcol < maze[prow].length; pcol++){
+			maze[prow][pcol] = x.next();
+		    }
+		}
+		*/
+		int prow = -1;
+		if(x.hasNextLine()){
+		    prow ++;
+		    Scanner y = new Scanner(x.nextLine());
+		    for(int i = 0; i < maze[0].length; i++){
+			maze[prow][i] = (char)y.next();
+		    }
+		}
 
     }
 
