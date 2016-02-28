@@ -44,7 +44,10 @@ public class Maze{
 	for(int prow = 0; prow < maze.length; prow++){
 	    for(int pcol = 0; pcol < maze[prow].length; pcol++){
 		maze[prow][pcol] = preMaze.charAt(prow*maze[0].length+pcol);
-		//check if is starting point
+		if(maze[prow][pcol] == 'S'){
+		    startx = prow;
+		    starty = pcol;
+		}
 	    }
 	}
     }
@@ -79,18 +82,51 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
 
     */
+    
     private boolean solve(int x, int y){
         if(animate){
             System.out.println(this);
             wait(20);
-        }
+        }/*
+	if(maze[x][y] != ' ' ||
+	   x < 0 ||
+	   x > maze.length ||
+	   y < 0 ||
+	   y > maze[0].length){
+	    return false;
+	}
+	if(maze[x+1][y] == 'E' ||
+	   maze[x][y-1] == 'E' ||
+	   maze[x-1][y] == 'E' ||
+	   maze[x][y+1] == 'E'){
+	    maze[x][y] = '@';
+	    return true;
+	}
+	if(maze[x+1][y] != ' ' &&
+	   maze[x][y-1] != ' ' &&
+	   maze[x-1][y] != ' ' &&
+	   maze[x][y+1] != ' '){
+	    maze[x][y] = '.';
+	    return false;
+	} 
+	 */
+	if(x < 0 || x > maze.length || y < 0 || y > maze[0].length ||
+	   (maze[x][y] != 'E' && maze[x][y] != ' ')){
+	    return false;
+	}
+	if(maze[x][y] == 'E'){
+	    return true;
+	}else{
+	    maze[x][y] = '@';
+	}
+	return (solve(x+1,y) ||
+		solve(x-1,y) ||
+		solve(x,y+1) ||
+		solve(x,y-1));
 
-        //COMPLETE SOLVE
-
-        return false; //so it compiles
+	//        return false; //so it compiles
     }
-
-
+    
 
     //FREE STUFF!!! *you should be aware of this*
 
@@ -106,42 +142,18 @@ public class Maze{
 	}
 	for (int prow = 0; prow < maze.length; prow ++){
 	    for (int pcol = 0; pcol < maze[prow].length; pcol ++){
-		/*
 		if(maze[prow][pcol] == '#'){
 		    ans += color(38,47);
 		}else{
 		    ans += color(33,40);
 		}
-		*/
 		ans += maze[prow][pcol];
 	    }
 	    ans += "\n";
 	}
-	return ans;
+	return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
     }
 
-    /*
-    public String toString(){
-        int maxx = maze.length;
-        int maxy = maze[0].length;
-        String ans = "";
-        if(animate){
-            ans = "Solving a maze that is " + maxx + " by " + maxy + "\n";
-        }
-        for(int i = 0; i < maxx * maxy; i++){
-            if(i % maxx == 0 && i != 0){
-                ans += "\n";
-            }
-            char c =  maze[i % maxx][i / maxx];
-            if(c == '#'){
-                ans += color(38,47)+c;
-            }else{
-                ans += color(33,40)+c;
-            }
-        }
-        return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
-    }
-    */
 
     //MORE FREE STUFF!!! *you can ignore all of this*
 
