@@ -119,11 +119,15 @@ public class Maze{
 	}else{
 	    maze[x][y] = '@';
 	}
-	return (solve(x+1,y) ||
-		solve(x-1,y) ||
-		solve(x,y+1) ||
-		solve(x,y-1));
-
+        if(solve(x-1,y) ||
+	   solve(x+1,y) ||
+	   solve(x,y+1) ||
+	   solve(x,y-1)){
+	    return true;
+	}else{
+	    maze[x][y] = '.';
+	}
+	return false;
 	//        return false; //so it compiles
     }
     
@@ -176,9 +180,7 @@ public class Maze{
         }
         catch (InterruptedException e) {
         }
-    }
-
-    
+    }    
 
     //END FREE STUFF
 
