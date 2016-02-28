@@ -32,7 +32,6 @@ public class Maze{
 		row ++;
 		String rowElements = x.nextLine();
 		col = rowElements.length();
-		//		System.out.println(rowElements);
 		preMaze+= rowElements;
 	    }
 	}catch(FileNotFoundException e){
@@ -40,13 +39,12 @@ public class Maze{
 	    System.exit(0);
 	}
 	maze = new char[row][col];
-	//	System.out.println(preMaze);
-	for(int x = 0; x < maze.length; x++){
-	    for(int y = 0; y < maze[x].length; y++){
-		maze[x][y] = preMaze.charAt(x*maze.length+y);
+	for(int prow = 0; prow < maze.length; prow++){
+	    for(int pcol = 0; pcol < maze[prow].length; pcol++){
+		maze[prow][pcol] = preMaze.charAt(prow*maze.length+pcol);
 	    }
 	}
-
+	
     }
 
 
