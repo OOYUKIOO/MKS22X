@@ -20,8 +20,8 @@ public class Silver{
 	pasture = new int[row+2][col+2];
 	//make surrounding pad and tree -1
 	for (int y = 0; y < pasture.length; y++){
-	    if(y == 0 || y == pasture.length-1){
-		for(int x = 0; x < pasture[y].length; x++){
+	    for(int x = 0; x < pasture[y].length; x++){
+		if(x==0 || y==0 || x==pasture[y].length-1 || y==pasture.length-1){
 		    pasture[y][x] = -1;
 		}
 	    }
@@ -29,9 +29,6 @@ public class Silver{
 	    for(int x = 0; x < rowElement.length(); x++){
 		if(rowElement.charAt(x) == '*'){
 		    pasture[y+1][x+1] = -1;
-		}
-		if(x == 0 || x == pasture[0].length-1){
-		    pasture[y][x] = -1;
 		}
 	    }
 	}
