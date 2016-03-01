@@ -41,6 +41,9 @@ public class Silver{
 	    int [] temp = new int [col*row - 1];
 	    for(int prow = 0; prow < pasture.length; prow++){
 		for (int pcol = 0; pcol < pasture[prow].length; pcol++){
+		    if(y!=0 && y!=pasture.length-1 && x!=0 && x!=pasture[y].length-1){
+
+		    }
 		    /*
 		    //top side
 		    if(prow == 0){
@@ -81,7 +84,11 @@ public class Silver{
 	String ans = "";
 	for(int y = 0; y < pasture.length; y++){
 	    for(int x = 0; x < pasture[y].length; x++){
+		if(pasture[y][x]/10 == 0 && pasture[x][y] != -1){
+		    ans += "0"+pasture[y][x]+" ";
+		}else{
 		ans += pasture[y][x] + " ";
+		}
 	    }
 	    ans += "\n";
 	}
