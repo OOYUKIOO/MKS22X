@@ -5,7 +5,7 @@ public class Silver{
     int row,col,steps;
     int[][]pasture;
     int startx,starty,endx,endy;
-
+    int[]coord = {0,1,0,-1,1,0,-1,0};
     //constructor
     public Silver(){
 	Scanner input = new Scanner("");
@@ -39,40 +39,21 @@ public class Silver{
 	pasture[startx][starty] = 1;
 	while(steps > 0){
 	    int [] temp = new int [col*row - 1];
+	    /*
 	    for(int prow = 0; prow < pasture.length; prow++){
 		for (int pcol = 0; pcol < pasture[prow].length; pcol++){
-		    if(y!=0 && y!=pasture.length-1 && x!=0 && x!=pasture[y].length-1){
+		    if(prow!=0 && prow!=pasture.length-1 && pcol!=0 && pcol!=pasture[prow].length-1){
 
 		    }
-		    /*
-		    //top side
-		    if(prow == 0){
-			if(pcol == 0){
-			    temp[pcol] = pasture[prow+1][pcol] + pasture[prow][pcol+1];
-			}else if(pcol == col-1){
-			    temp[pcol] = pasture[prow+1][pcol] + pasture[prow][pcol-1];
-			}else{
-			    temp[pcol] = pasture[prow][pcol-1] + pasture[prow][pcol+1] + pasture[prow+1][pcol];
-			}
-			//bottom side
-		    }else if(prow == row-1){
-			if(pcol == 0){
-			    temp[prow*col+pcol] = pasture[prow-1][pcol] + pasture[prow][pcol+1];
-			}else if(pcol == col-1){
-			    temp[prow*col+pcol] = pasture[prow-1][pcol] + pasture[prow][pcol-1];
-			}else{
-			    temp[prow*col+pcol] = pasture[prow][pcol-1] + pasture[prow][pcol+1] + pasture[prow-1][pcol];
-			}
-		    //left side
-		    }else if(pcol == 0){
-			temp[prow*col+pcol] = pasture[prow-1][pcol] + pasture[prow+1][pcol] + pasture[prow][pcol+1];
-			//right side
-		    }else if(pcol == col-1){
-			temp[prow*col+pcol] = pasture[prow-1][pcol] + pasture[prow+1][pcol] + pasture[prow][pcol-1];
-		    }else{
-			temp[prow*col+pcol] = pasture[prow-1][pcol] + pasture[prow+1][pcol] + pasture[prow][pcol-1] + pasture[prow][pcol+1];
-		    }
-		    */
+		}
+	    }
+	    */
+	    for(int i = 0; i < temp.length; i++){
+		int sum = 0;
+		int tempy = i/row + 1;
+		int tempx = i%row + 1;
+		for(int k = 0; k < coord.length/2; k++){
+
 		}
 	    }
 	}
