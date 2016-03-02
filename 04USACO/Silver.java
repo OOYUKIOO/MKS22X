@@ -36,26 +36,22 @@ public class Silver{
 
     //to solve
     public int solve(){
-	pasture[startx][starty] = 1;
+	pasture[startx+1][starty+1] = 1;
 	while(steps > 0){
 	    int [] temp = new int [col*row - 1];
-	    /*
-	    for(int prow = 0; prow < pasture.length; prow++){
-		for (int pcol = 0; pcol < pasture[prow].length; pcol++){
-		    if(prow!=0 && prow!=pasture.length-1 && pcol!=0 && pcol!=pasture[prow].length-1){
-
-		    }
-		}
-	    }
-	    */
 	    for(int i = 0; i < temp.length; i++){
 		int sum = 0;
 		int tempy = i/row + 1;
 		int tempx = i%row + 1;
-		for(int k = 0; k < coord.length/2; k++){
-
+		for(int k = 0; k < 4; k++){
+		    if(pasture[tempy+coord[k*2]][tempx+coord[k*2+1]] != -1){
+			sum += pasture[tempy+coord[k*2]][tempx+coord[k*2+1]];
+		    }
 		}
+			System.out.println(sum);
+			temp[i] = sum;
 	    }
+	    steps--;
 	}
 	return pasture[endx][endy];
     }
@@ -79,6 +75,8 @@ public class Silver{
     //testing
     public static void main(String[]args){
 	Silver x = new Silver();
+	System.out.println(x);
+	x.solve();
 	System.out.println(x);
     } 
 
