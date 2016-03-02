@@ -25,6 +25,8 @@ public class Silver{
 		    pasture[y][x] = -1;
 		}
 	    }
+	}
+	for (int y = 0; y < row; y++){
 	    String rowElement = input.next();
 	    for(int x = 0; x < rowElement.length(); x++){
 		if(rowElement.charAt(x) == '*'){
@@ -32,11 +34,16 @@ public class Silver{
 		}
 	    }
 	}
+   	startx = input.nextInt();
+	starty = input.nextInt();
+	endy = input.nextInt();
+	endx = input.nextInt();
+	System.out.println(""+startx+", "+starty+", "+endy+", "+endx);
     }
 
     //to solve
     public int solve(){
-	pasture[startx+1][starty+1] = 1;
+	pasture[startx][starty] = 1;
 	while(steps > 0){
 	    int [] temp = new int [col*row - 1];
 	    for(int i = 0; i < temp.length; i++){
@@ -48,12 +55,17 @@ public class Silver{
 			sum += pasture[tempy+coord[k*2]][tempx+coord[k*2+1]];
 		    }
 		}
-			System.out.println(sum);
-			temp[i] = sum;
+		temp[i] = sum;
+	    }
+	    for(int i = 0; i < temp.length; i++){
+		if(pasture[i/row+1][i%row+1] != -1){
+		    pasture[i/row+1][i%row+1] = temp[i];
+		}
 	    }
 	    steps--;
 	}
-	return pasture[endx][endy];
+	System.out.println(pasture[endy+1][endx+1]);
+	return pasture[endy+1][endx+1];
     }
 
     //for debugging purpose
@@ -76,8 +88,10 @@ public class Silver{
     public static void main(String[]args){
 	Silver x = new Silver();
 	System.out.println(x);
+	System.out.println();
 	x.solve();
 	System.out.println(x);
+	//	System.out.println(x.solve());
     } 
 
    
