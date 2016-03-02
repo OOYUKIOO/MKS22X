@@ -45,11 +45,11 @@ public class Silver{
     public int solve(){
 	pasture[startx][starty] = 1;
 	while(steps > 0){
-	    int [] temp = new int [col*row - 1];
+	    int [] temp = new int [col*row];
 	    for(int i = 0; i < temp.length; i++){
 		int sum = 0;
-		int tempy = i/row + 1;
-		int tempx = i%row + 1;
+		int tempy = i/col+1;
+		int tempx = i%col+1;
 		for(int k = 0; k < 4; k++){
 		    if(pasture[tempy+coord[k*2]][tempx+coord[k*2+1]] != -1){
 			sum += pasture[tempy+coord[k*2]][tempx+coord[k*2+1]];
@@ -58,14 +58,13 @@ public class Silver{
 		temp[i] = sum;
 	    }
 	    for(int i = 0; i < temp.length; i++){
-		if(pasture[i/row+1][i%row+1] != -1){
-		    pasture[i/row+1][i%row+1] = temp[i];
+		if(pasture[i/col+1][i%col+1] != -1){
+		    pasture[i/col+1][i%col+1] = temp[i];
 		}
 	    }
 	    steps--;
 	}
-	System.out.println(pasture[endy+1][endx+1]);
-	return pasture[endy+1][endx+1];
+	return pasture[endy][endx];
     }
 
     //for debugging purpose
@@ -73,7 +72,7 @@ public class Silver{
 	String ans = "";
 	for(int y = 0; y < pasture.length; y++){
 	    for(int x = 0; x < pasture[y].length; x++){
-		if(pasture[y][x]/10 == 0 && pasture[x][y] != -1){
+		if(pasture[y][x]/10 == 0 && pasture[y][x] != -1){
 		    ans += "0"+pasture[y][x]+" ";
 		}else{
 		ans += pasture[y][x] + " ";
@@ -89,10 +88,9 @@ public class Silver{
 	Silver x = new Silver();
 	System.out.println(x);
 	System.out.println();
-	x.solve();
+	System.out.println(x.solve());
 	System.out.println(x);
-	//	System.out.println(x.solve());
     } 
-
+    
    
 }
