@@ -33,12 +33,10 @@ public static void printArray(int[]data){
 		}
 	    }
 	}
-	printArray(temp);
 	for(int i = 0; i < temp.length; i++){
 	    data[start] = temp[i];
 	    start++;
 	}
-	printArray(data);
     }
 
 
