@@ -14,7 +14,6 @@ public class Sorts{
 	System.out.println(message.substring(0,message.length()-1)+"]");
     }
 
-    /*
       public static void bubbleSort(int[]data){
       for(int x = 0; x < data.length-1; x++){
       for (int i = 0; i<data.length - 1; i++){
@@ -63,51 +62,44 @@ public static void selectionSort(int[]data){
 	}
 	
 }
-*/
+
 
 
 
  public static int[] mergeSort(int[]data){
-     /*
-     if(data.length == 1){
-	 return merge(data,0,0,0,0);
-     }else{
-	 int midway = data.length / 2;
-	 mergeSort(Arrays.copyOfRange(data,0,midway));
-	 mergeSort(Arrays.copyOfRange(data,midway,data.length));
+     if(data.length<=1){
+	 return data;
      }
+     int[] firstHalf = new int[data.length/2];
+     int[] secondHalf = new int[data.length - firstHalf.length];
+     System.arraycopy(data,0,firstHalf,0,firstHalf.length);
+     //     printArray(firstHalf);
+     System.arraycopy(data,firstHalf.length,secondHalf,0,secondHalf.length);
+     //     printArray(secondHalf);
+     mergeSort(firstHalf);
+     mergeSort(secondHalf);
+     merge(data,firstHalf,secondHalf);
      return data;
-     */
-     return merge(data,0,0,0,0);
  }
 
-public static int[] merge(int[]data, int startA, int endA, int startB, int endB){
-	int start = startA;
-	int[] temp = new int[(endA-startA+1) + (endB-startB+1)];
-	for(int i = 0; i < temp.length; i++){
-	    if(startA > endA){
-		temp[i] = data[startB];
-		startB++;
-	    }else if(startB > endB){
-		temp[i] = data[startA];
-		startA++;
+    public static void merge(int[]data, int[]first, int[]second){
+	int firstI = 0;
+	int secondI = 0;
+	int dataI = 0;
+	while(firstI < first.length && secondI < second.length){
+	    if(first[firstI] < second[secondI]){
+		data[dataI] = first[firstI];
+		firstI ++;
+		dataI ++;
 	    }else{
-		temp[i] = Math.min(data[startA], data[startB]);
-		if(temp[i] == data[startA]){
-		    startA++;
-		}else{
-		    startB++;
-		}
+		data[dataI] = second[secondI];
+		secondI ++;
+		dataI ++;
 	    }
 	}
-	for(int i = 0; i < temp.length; i++){
-	    data[start] = temp[i];
-	    start++;
-	}
-	return data;
+	System.arraycopy(first,firstI,data,dataI,first.length-firstI);
+	System.arraycopy(second,secondI,data,dataI,second.length-secondI);
     }
-
-
 
 
     //testing
