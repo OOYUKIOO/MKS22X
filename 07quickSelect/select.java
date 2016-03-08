@@ -12,12 +12,39 @@ public class select{
 	}
     }
 
-    public int select(int[]data, int k){
-	return 0;
+    public void select(int k){
+	swap(0,data.length-1,k);
     }
 
-    public void swap(int[]data, int Lindex, int Rindex, int goal){
-
+    public void swap(int Lindex, int Rindex, int goal){
+	int rightIndex = Rindex;
+	int leftIndex = Lindex;
+	int pos = rand.nextInt(Rindex - Lindex);
+	int selected = data[pos];
+	data[pos] = data[Rindex];
+	Rindex --;
+	while(Lindex != Rindex){
+	    int temp = data[Lindex];
+	    if(temp<selected){
+		Lindex ++;
+	    }else{
+		data[Lindex] = data[Rindex];
+		data[Rindex] = temp;
+		Rindex --;
+	    }
+	}
+	if(data[Lindex] < selected){
+	    Lindex++;
+	}
+	data[rightIndex] = data[Lindex];
+	data[Lindex] = selected;
+	if(Lindex == goal){
+	    System.out.println(data[Lindex]);
+	}else if(Lindex > goal){
+	    swap(leftIndex,Rindex-1,goal);
+	}else{
+	    swap(Rindex+1,rightIndex,goal);
+	}
     }
 
     public void printArray(){
@@ -34,8 +61,10 @@ public class select{
 
     //testing
     public static void main(String[]args){
+
 	select x = new select(10);
 	x.printArray();
+	x.select(1);
     }
 
 
