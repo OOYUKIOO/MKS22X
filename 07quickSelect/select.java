@@ -17,13 +17,24 @@ public class select{
     }
 
     public void swap(int Lindex, int Rindex, int goal){
+	printArray();
 	int rightIndex = Rindex;
 	int leftIndex = Lindex;
-	int pos = rand.nextInt(Rindex - Lindex);
+	//System.out.println("Left Index is: " + leftIndex + "\nRight Index is : " + rightIndex);
+	int pos = rand.nextInt(rightIndex - leftIndex);
 	int selected = data[pos];
+	System.out.println(Rindex+", " + rightIndex);
 	data[pos] = data[Rindex];
 	Rindex --;
+	printArray();
 	while(Lindex != Rindex){
+	    System.out.println("Left Index is: " + Lindex + "\nRight Index is : " + Rindex +
+			       "\nselected: " + pos + "\ngoal : " + goal);
+	    //	    System.out.println(rightIndex - leftIndex);
+	    //	    pos = rand.nextInt(rightIndex - leftIndex);
+	    //	    selected = data[pos];
+	    //	    data[pos] = data[Rindex];
+	    
 	    int temp = data[Lindex];
 	    if(temp>selected){
 		Lindex ++;
@@ -32,6 +43,7 @@ public class select{
 		data[Rindex] = temp;
 		Rindex --;
 	    }
+	    printArray();
 	}
 	if(data[Lindex] > selected){
 	    Lindex++;
@@ -41,9 +53,9 @@ public class select{
 	if(Lindex+1  == goal){
 	    System.out.println(data[Lindex]);
 	}else if(Lindex > goal){
-	    swap(leftIndex,Rindex-1,goal);
+	    swap(leftIndex,Rindex,goal);
 	}else{
-	    swap(Rindex+1,rightIndex,goal);
+	    swap(Rindex,rightIndex,goal);
 	}
     }
 
@@ -63,7 +75,7 @@ public class select{
     public static void main(String[]args){
 
 	select x = new select(10);
-	x.printArray();
+	//	x.printArray();
 	x.select(1);
     }
 
