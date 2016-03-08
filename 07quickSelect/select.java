@@ -25,7 +25,7 @@ public class select{
 	Rindex --;
 	while(Lindex != Rindex){
 	    int temp = data[Lindex];
-	    if(temp<selected){
+	    if(temp>selected){
 		Lindex ++;
 	    }else{
 		data[Lindex] = data[Rindex];
@@ -33,12 +33,12 @@ public class select{
 		Rindex --;
 	    }
 	}
-	if(data[Lindex] < selected){
+	if(data[Lindex] > selected){
 	    Lindex++;
 	}
 	data[rightIndex] = data[Lindex];
 	data[Lindex] = selected;
-	if(Lindex == goal){
+	if(Lindex+1  == goal){
 	    System.out.println(data[Lindex]);
 	}else if(Lindex > goal){
 	    swap(leftIndex,Rindex-1,goal);
