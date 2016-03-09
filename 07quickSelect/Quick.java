@@ -4,11 +4,11 @@ public class Quick{
 
 
     private static int quickselect(int[]data, int k){
-	return quickselect(data,k,0,data.length-1);
+	return partition(data,0,data.length-1,k);
 	
     }
 
-    
+    /*
     public static int quickselect(int[]data, int k, int left, int right){
 	int pos = partition(data,left,right);
 	if(pos == k){
@@ -19,10 +19,10 @@ public class Quick{
 	}else{
 	    return quickselect(data,k,left,pos-1);
 	}
-    }
+	}*/
     
 
-    private static int partition(int[]data, int left, int right){
+    private static int partition(int[]data, int left, int right, int k){
 	Random rand = new Random();
 	printArray(data);//test
 	System.out.println("left index = " + left + "; right index = " + right);//test
@@ -30,7 +30,7 @@ public class Quick{
 	int rightI = right;
 	int pos = 0;       
 	if(left == right){
-	    return left;
+	    return data[left];
 	}else{
 	    pos = rand.nextInt(right-left);
 	}
@@ -58,8 +58,16 @@ public class Quick{
 	printArray(data);//test
 	data[rightI] = data[left];
 	data[left] = selected;
-	Sytem.out.println("position is " + left);
-	return left;
+	System.out.println("position is " + left);
+	if(left == k){
+	    printArray(data);
+	    System.out.println(data[left]);
+	    return data[k];
+	}else if (left < k){
+	    return partition(data,left+1,rightI,k);
+	}else{
+	    return partition(data,leftI,left-1,k);
+	}
     }
 
 
