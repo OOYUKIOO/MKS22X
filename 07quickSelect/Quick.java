@@ -60,6 +60,26 @@ public class Quick{
     }
 
 
+    public static void printArray(int[]data){
+	String ans = "[";
+	if(data.length == 0){
+	    ans+= " ";
+	}
+	for(int i = 0; i < data.length; i++){
+	    ans += data[i]+",";
+	}
+	System.out.println(ans.substring(0,ans.length()-1)+"]");
+    }
+
     //testing
+    public static void main(String[]args){
+	int[] x = new int[10];
+	Random rand = new Random();
+	for(int i = 0; i < x.length; i++){
+	    x[i] = rand.nextInt(11);
+	}
+	printArray(x);
+	System.out.println(quickselect(x,0));
+    }
 
 }
