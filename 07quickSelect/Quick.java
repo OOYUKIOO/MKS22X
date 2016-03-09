@@ -2,6 +2,10 @@ import java.util.Random;
 
 public class Quick{
 
+    public static String name(){
+	return "6,Chen,Yuxuan";
+    }
+
 
     private static int quickselect(int[]data, int k){
 	return partition(data,0,data.length-1,k);
