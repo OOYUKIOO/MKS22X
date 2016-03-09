@@ -8,24 +8,8 @@ public class Quick{
 	
     }
 
-    /*
-    public static int quickselect(int[]data, int k, int left, int right){
-	int pos = partition(data,left,right);
-	if(pos == k){
-	    return data[k];
-	}
-	if(pos < k){
-	    return  quickselect(data,k,pos+1,right);
-	}else{
-	    return quickselect(data,k,left,pos-1);
-	}
-	}*/
-    
-
     private static int partition(int[]data, int left, int right, int k){
 	Random rand = new Random();
-	printArray(data);//test
-	System.out.println("left index = " + left + "; right index = " + right);//test
 	int leftI = left;
 	int rightI = right;
 	int pos = 0;       
@@ -38,8 +22,6 @@ public class Quick{
 	data[pos] = data[right];
 	data[right] = selected;
 	right --;
-	printArray(data);//test
-	System.out.println("selected pos = " + pos + "; selected element = " + selected);//test
 	while(left != right){
 	    int temp = data[left];
 	    if(temp <= selected){
@@ -49,19 +31,13 @@ public class Quick{
 		data[right] = temp;
 		right--;
 	    }
-	    printArray(data);//testing
-	    System.out.println("left index = " + left + "; right index = " + right);//test
 	}
 	if(data[left] < selected){
 	    left++;
 	}
-	printArray(data);//test
 	data[rightI] = data[left];
 	data[left] = selected;
-	System.out.println("position is " + left);
 	if(left == k){
-	    printArray(data);
-	    System.out.println(data[left]);
 	    return data[k];
 	}else if (left < k){
 	    return partition(data,left+1,rightI,k);
@@ -89,8 +65,8 @@ public class Quick{
 	for(int i = 0; i < x.length; i++){
 	    x[i] = rand.nextInt(11);
 	}
-	//	printArray(x);
-	System.out.println(quickselect(x,3));
+	printArray(x);
+	System.out.println(quickselect(x,8));
     }
 
 }
