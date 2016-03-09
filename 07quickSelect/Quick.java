@@ -24,14 +24,22 @@ public class Quick{
 
     private static int partition(int[]data, int left, int right){
 	Random rand = new Random();
-
+	printArray(data);
+	System.out.println("left index = " + left + "; right index = " + right);
 	int leftI = left;
 	int rightI = right;
-	int pos = rand.nextInt(right - left);
+	int pos = 0;       
+	if(left == right){
+	    return left;
+	}else{
+	    pos = rand.nextInt(right-left);
+	}
 	int selected = data[pos];
 	data[pos] = data[right];
 	data[right] = selected;
 	right --;
+	printArray(data);
+	System.out.println("selected pos = " + pos + "; selected element = " + selected);
 	while(left != right){
 	    int temp = data[left];
 	    if(temp < selected){
@@ -47,15 +55,6 @@ public class Quick{
 	}
 	data[rightI] = data[left];
 	data[left] = selected;
-	/*
-	if(left == k){
-	    return data[left];
-	}else if(left > k){
-	    return quickselect(data, k, leftI, left-1);
-	}else{
-	    return quickselect(data, k, left+1, rightI);
-	}
-	*/
 	return left;
     }
 
@@ -78,7 +77,7 @@ public class Quick{
 	for(int i = 0; i < x.length; i++){
 	    x[i] = rand.nextInt(11);
 	}
-	printArray(x);
+	//	printArray(x);
 	System.out.println(quickselect(x,0));
     }
 
