@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Quick{
 
-    static boolean DEBUG = true;
+    static boolean DEBUG = false;
 
     private static void debug(String s){
 	if(DEBUG){
@@ -71,7 +71,7 @@ public class Quick{
     private static void quickSort(int[]data, int left, int right){
 	if(right>left){
 	    int offset = partition(data,left,right);
-	    printArray(data);
+	    //   printArray(data);
 	    quickSort(data,left,offset-1);
 	    quickSort(data,offset+1,right);
 	    
@@ -87,7 +87,7 @@ public class Quick{
 	for(int i = 0; i < data.length; i++){
 	    ans += data[i]+",";
 	}
-	System.out.println(ans.substring(0,ans.length()-1));
+	System.out.println(ans.substring(0,ans.length()-1)+"]");
     }
 
     //testing
@@ -101,10 +101,11 @@ public class Quick{
 	printArray(x);
 	System.out.println(quickselect(x,8));
 	printArray(x);
-	*/
+	
 	printArray(x);
 	quickSort(x);
 	printArray(x);
+	*/
     }
 
 }
