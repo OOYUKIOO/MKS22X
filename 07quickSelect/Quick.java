@@ -2,23 +2,43 @@ import java.util.Random;
 
 public class Quick{
 
+    static boolean DEBUG = true;
+
+    private static void debug(String s){
+	if(DEBUG){
+	    System.out.println(s);
+	}
+    }
+
     public static String name(){
 	return "6,Chen,Yuxuan";
     }
 
 
-    private static int quickselect(int[]data, int k){
-	return partition(data,0,data.length-1,k);
-	
+    public static int quickselect(int[]data, int k){
+	return quickselect(data,k,0,data.length-1);
     }
 
-    private static int partition(int[]data, int left, int right, int k){
+    private static int quickselect(int[]data, int k, int left, int right){
+	int guess = partition(data,left,right);
+	debug("guess position = "+guess+"\nresult array is: ");
+	printArray(data);
+	if(guess == k){
+	    return data[guess];
+	}else if(guess < k){
+	    return quickselect(data,k,guess+1,right);
+	}else{
+	    return quickselect(data,k,left,guess-1);
+	}
+    }
+
+    private static int partition(int[]data, int left, int right){
 	Random rand = new Random();
 	int leftI = left;
 	int rightI = right;
 	int pos = 0;       
 	if(left == right){
-	    return data[left];
+	    return left;
 	}else{
 	    pos = left + rand.nextInt(right-left + 1);
 	}
@@ -41,6 +61,7 @@ public class Quick{
 	}
 	data[rightI] = data[left];
 	data[left] = selected;
+	return left;
 	/*
 	if(left == k){
 	    return data[k];
@@ -50,6 +71,7 @@ public class Quick{
 	    return partition(data,leftI,left-1,k);
 	}
 	*/
+
     }
 
 
