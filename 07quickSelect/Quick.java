@@ -62,16 +62,20 @@ public class Quick{
 	data[rightI] = data[left];
 	data[left] = selected;
 	return left;
-	/*
-	if(left == k){
-	    return data[k];
-	}else if (left < k){
-	    return partition(data,left+1,rightI,k);
-	}else{
-	    return partition(data,leftI,left-1,k);
-	}
-	*/
+    }
 
+    public static void quickSort(int[]data){
+	quickSort(data,0,data.length-1);
+    }
+
+    private static void quickSort(int[]data, int left, int right){
+	if(right>left){
+	    int offset = partition(data,left,right);
+	    printArray(data);
+	    quickSort(data,left,offset-1);
+	    quickSort(data,offset+1,right);
+	    
+	}
     }
 
 
@@ -83,7 +87,7 @@ public class Quick{
 	for(int i = 0; i < data.length; i++){
 	    ans += data[i]+",";
 	}
-	System.out.println(ans.substring(0,ans.length()-1)+"]");
+	System.out.println(ans.substring(0,ans.length()-1));
     }
 
     //testing
@@ -93,8 +97,13 @@ public class Quick{
 	for(int i = 0; i < x.length; i++){
 	    x[i] = rand.nextInt(20);
 	}
+	/*
 	printArray(x);
 	System.out.println(quickselect(x,8));
+	printArray(x);
+	*/
+	printArray(x);
+	quickSort(x);
 	printArray(x);
     }
 
