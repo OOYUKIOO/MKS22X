@@ -20,7 +20,7 @@ public class Quick{
 	if(left == right){
 	    return data[left];
 	}else{
-	    pos = rand.nextInt(right-left);
+	    pos = left + rand.nextInt(right-left + 1);
 	}
 	int selected = data[pos];
 	data[pos] = data[right];
@@ -41,6 +41,7 @@ public class Quick{
 	}
 	data[rightI] = data[left];
 	data[left] = selected;
+	/*
 	if(left == k){
 	    return data[k];
 	}else if (left < k){
@@ -48,6 +49,7 @@ public class Quick{
 	}else{
 	    return partition(data,leftI,left-1,k);
 	}
+	*/
     }
 
 
@@ -67,10 +69,11 @@ public class Quick{
 	int[] x = new int[10];
 	Random rand = new Random();
 	for(int i = 0; i < x.length; i++){
-	    x[i] = rand.nextInt(11);
+	    x[i] = rand.nextInt(20);
 	}
 	printArray(x);
 	System.out.println(quickselect(x,8));
+	printArray(x);
     }
 
 }
