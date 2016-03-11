@@ -1,5 +1,6 @@
 import java.util.Random;
-
+import java.util.Arrays;
+import java.lang.System;
 public class Quick{
 
     static boolean DEBUG = false;
@@ -14,13 +15,15 @@ public class Quick{
 	return "6,Chen,Yuxuan";
     }
 
-
+    /*
     public static int quickselect(int[]data, int k){
 	return quickselect(data,k,0,data.length-1);
     }
 
     private static int quickselect(int[]data, int k, int left, int right){
-	int guess = partition(data,left,right);
+	int[]guess = new int[2];
+	guess[0] = partition(data,left,right)[0];
+	guess[1] = partition(data,left,right)[1];
 	debug("guess position = "+guess+"\nresult array is: ");
 	printArray(data);
 	if(guess == k){
@@ -31,14 +34,19 @@ public class Quick{
 	    return quickselect(data,k,left,guess-1);
 	}
     }
-
-    private static int partition(int[]data, int left, int right){
+*/
+    private static int[] partition(int[]data, int left, int right){
 	Random rand = new Random();
+	int[]ans = new int[2];
+	int [] copy = new int[data.length];
+	int copyleft = left;
+	int copyright = right;//lol
 	int leftI = left;
 	int rightI = right;
-	int pos = 0;       
+	int pos = 0; 
+	int pivots = 1;      
 	if(left == right){
-	    return left;
+	    return ans;
 	}else{
 	    pos = left + rand.nextInt(right-left + 1);
 	}
@@ -46,24 +54,35 @@ public class Quick{
 	data[pos] = data[right];
 	data[right] = selected;
 	right --;
-	while(left != right){
+	while(left <= right){
 	    int temp = data[left];
-	    if(temp <= selected){
+	    if(temp == selected){
+		pivots++;
 		left++;
+	    }else if(temp < selected){
+		copy[copyleft] = temp;
+		left++;
+		copyleft++;
 	    }else{
-		data[left] = data[right];
-		data[right] = temp;
+		copy[copyright] = temp;
 		right--;
+		copyright--;
 	    }
 	}
-	if(data[left] < selected){
-	    left++;
+	ans[0] = copyleft-1;
+	ans[1] = copyright+1;
+	for(int i = leftI; leftI < rightI; leftI++){
+	    if(i >= copyleft && i <= copyright){
+		data[i] = selected;
+	    }else{
+		data[i] = copy[i];
+	    }
 	}
-	data[rightI] = data[left];
-	data[left] = selected;
-	return left;
+	printArray(data);
+	return ans;
     }
 
+    /*
     public static void quickSort(int[]data){
 	quickSort(data,0,data.length-1);
     }
@@ -78,7 +97,7 @@ public class Quick{
 	}
     }
 
-
+*/
     public static void printArray(int[]data){
 	String ans = "[";
 	if(data.length == 0){
@@ -89,23 +108,40 @@ public class Quick{
 	}
 	System.out.println(ans.substring(0,ans.length()-1)+"]");
     }
-
+    
     //testing
     public static void main(String[]args){
 	int[] x = new int[10];
+	int[] y = new int[10];
 	Random rand = new Random();
 	for(int i = 0; i < x.length; i++){
-	    x[i] = rand.nextInt(20);
+	    x[i] = rand.nextInt(21);
+	    y[i] = x[i];
 	}
+	partition(x,0,x.length-1);
+	printArray(x);
 	/*
 	printArray(x);
 	System.out.println(quickselect(x,8));
 	printArray(x);
-	
-	printArray(x);
-	quickSort(x);
-	printArray(x);
-	*/
-    }
+	*/	
 
+
+	/*
+	//runtime result, quickSort takes around 10 millisecond more
+	long startTimeX = System.currentTimeMillis();
+	quickSort(x);
+	long endTimeX = System.currentTimeMillis();
+
+	long startTimeY = System.currentTimeMillis();
+	Arrays.sort(x);
+	long endTimeY = System.currentTimeMillis();
+
+	System.out.println("Time for quickSort is :" + (endTimeX - startTimeX) +
+			   "\nTime for array sort is : " + (endTimeY - startTimeY));
+
+    }
+*/
+    }
 }
+
