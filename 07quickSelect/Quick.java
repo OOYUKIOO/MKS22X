@@ -15,7 +15,7 @@ public class Quick{
 	return "6,Chen,Yuxuan";
     }
 
-    /*
+    /*    
     public static int quickselect(int[]data, int k){
 	return quickselect(data,k,0,data.length-1);
     }
@@ -24,8 +24,6 @@ public class Quick{
 	int[]guess = new int[2];
 	guess[0] = partition(data,left,right)[0];
 	guess[1] = partition(data,left,right)[1];
-	debug("guess position = "+guess+"\nresult array is: ");
-	printArray(data);
 	if(guess == k){
 	    return data[guess];
 	}else if(guess < k){
@@ -34,7 +32,7 @@ public class Quick{
 	    return quickselect(data,k,left,guess-1);
 	}
     }
-*/
+    */
     private static int[] partition(int[]data, int left, int right){
 	Random rand = new Random();
 	int[]ans = new int[2];
@@ -44,26 +42,17 @@ public class Quick{
 	int leftI = left;
 	int rightI = right;
 	int pos = 0; 
-	int pivots = 1;
-
-	printArray(data);
-      
 	if(left == right){
 	    return ans;
 	}else{
 	    pos = left + rand.nextInt(right-left + 1);
 	}
 	int selected = data[pos];
-	data[pos] = data[right];
-	data[right] = selected;
-	right --;
 	debug("The pivot element is "+selected+" at position "+pos);
-	printArray(data);
 	while(left <= right){
 	    int temp = data[left];
 	    debug("the choosen element is "+temp);
 	    if(temp == selected){
-		pivots++;
 		left++;
 		debug("choosen element is equal to pivot");
 	    }else if(temp < selected){
@@ -77,10 +66,8 @@ public class Quick{
 		copyright--;
 		debug("choosen element is greater than pivot");
 	    }
-	    printArray(copy);
 	}
 	debug("left index for copy array is "+copyleft+" and right index for copy array is "+copyright);
-	printArray(copy);
 	ans[0] = copyleft-1;
 	ans[1] = copyright+1;
 	for(int i = leftI; i <= rightI; i++){
@@ -90,11 +77,8 @@ public class Quick{
 		data[i] = copy[i];
 	    }
 	}
-	printArray(copy);
-	printArray(data);
 	return ans;
     }
-
     /*
     public static void quickSort(int[]data){
 	quickSort(data,0,data.length-1);
@@ -102,15 +86,16 @@ public class Quick{
 
     private static void quickSort(int[]data, int left, int right){
 	if(right>left){
-	    int offset = partition(data,left,right);
+	    int[] offsets = partition(data,left,right);
+	    int leftOffset = offsets[0];
+	    int rightOffset = offsets[1];
 	    //   printArray(data);
-	    quickSort(data,left,offset-1);
-	    quickSort(data,offset+1,right);
+	    quickSort(data,left,rightOffset);
+	    quickSort(data,leftOffset,right);
 	    
 	}
     }
-
-*/
+    */
     public static void printArray(int[]data){
 	String ans = "[";
 	if(data.length == 0){
@@ -126,12 +111,15 @@ public class Quick{
     public static void main(String[]args){
 	int[] x = new int[10];
 	int[] y = new int[10];
+	int[] a = {3,5,2,5,6,2,1,6,4,7,3,2,4,2,2,3,3,5,6,9};
 	Random rand = new Random();
 	for(int i = 0; i < x.length; i++){
 	    x[i] = rand.nextInt(21);
 	    y[i] = x[i];
 	}
-	partition(x,0,x.length-1);
+	//	partition(a,0,a.length-1);
+	printArray(x);
+	//	quickSort(x);
 	printArray(x);
 	/*
 	printArray(x);
