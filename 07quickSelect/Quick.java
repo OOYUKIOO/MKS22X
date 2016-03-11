@@ -66,6 +66,7 @@ public class Quick{
 		copyright--;
 		debug("choosen element is greater than pivot");
 	    }
+	    printArray(copy);
 	}
 	debug("left index for copy array is "+copyleft+" and right index for copy array is "+copyright);
 	ans[0] = copyleft-1;
@@ -79,23 +80,30 @@ public class Quick{
 	}
 	return ans;
     }
-    /*
+
+    
     public static void quickSort(int[]data){
 	quickSort(data,0,data.length-1);
     }
-
+   
     private static void quickSort(int[]data, int left, int right){
-	if(right>left){
+	printArray(data);
+	if(left<right){
+	    debug("The left index is "+left+"\nthe right index is "+right);
 	    int[] offsets = partition(data,left,right);
 	    int leftOffset = offsets[0];
 	    int rightOffset = offsets[1];
-	    //   printArray(data);
-	    quickSort(data,left,rightOffset);
-	    quickSort(data,leftOffset,right);
-	    
+	    if(left>0 && left<data.length){
+		quickSort(data,left,leftOffset);
+	    }
+	    if(right>0 && right<data.length){
+		quickSort(data,rightOffset,right);
+	    }
 	}
     }
-    */
+
+
+
     public static void printArray(int[]data){
 	String ans = "[";
 	if(data.length == 0){
@@ -119,7 +127,7 @@ public class Quick{
 	}
 	//	partition(a,0,a.length-1);
 	printArray(x);
-	//	quickSort(x);
+	quickSort(x);
 	printArray(x);
 	/*
 	printArray(x);
