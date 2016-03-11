@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.lang.System;
 public class Quick{
 
-    static boolean DEBUG = false;
+    static boolean DEBUG = true;
 
     private static void debug(String s){
 	if(DEBUG){
@@ -44,7 +44,10 @@ public class Quick{
 	int leftI = left;
 	int rightI = right;
 	int pos = 0; 
-	int pivots = 1;      
+	int pivots = 1;
+
+	printArray(data);
+      
 	if(left == right){
 	    return ans;
 	}else{
@@ -54,30 +57,40 @@ public class Quick{
 	data[pos] = data[right];
 	data[right] = selected;
 	right --;
+	debug("The pivot element is "+selected+" at position "+pos);
+	printArray(data);
 	while(left <= right){
 	    int temp = data[left];
+	    debug("the choosen element is "+temp);
 	    if(temp == selected){
 		pivots++;
 		left++;
+		debug("choosen element is equal to pivot");
 	    }else if(temp < selected){
 		copy[copyleft] = temp;
 		left++;
 		copyleft++;
+		debug("choosen element is less than pivot");
 	    }else{
 		copy[copyright] = temp;
-		right--;
+		left++;
 		copyright--;
+		debug("choosen element is greater than pivot");
 	    }
+	    printArray(copy);
 	}
+	debug("left index for copy array is "+copyleft+" and right index for copy array is "+copyright);
+	printArray(copy);
 	ans[0] = copyleft-1;
 	ans[1] = copyright+1;
-	for(int i = leftI; leftI < rightI; leftI++){
+	for(int i = leftI; i <= rightI; i++){
 	    if(i >= copyleft && i <= copyright){
 		data[i] = selected;
 	    }else{
 		data[i] = copy[i];
 	    }
 	}
+	printArray(copy);
 	printArray(data);
 	return ans;
     }
