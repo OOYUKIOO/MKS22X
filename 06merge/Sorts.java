@@ -66,47 +66,55 @@ public static void selectionSort(int[]data){
 
 
 
- public static int[] mergeSort(int[]data){
-     if(data.length<=1){
-	 return data;
-     }
-     int[] firstHalf = new int[data.length/2];
-     int[] secondHalf = new int[data.length - firstHalf.length];
-     System.arraycopy(data,0,firstHalf,0,firstHalf.length);
-     //     printArray(firstHalf);
-     System.arraycopy(data,firstHalf.length,secondHalf,0,secondHalf.length);
-     //     printArray(secondHalf);
-     mergeSort(firstHalf);
-     mergeSort(secondHalf);
-     merge(data,firstHalf,secondHalf);
-     return data;
+ public static void mergesort(int[]data){
+     mergesort(data,0,data.length-1,1);
  }
 
-    public static void merge(int[]data, int[]first, int[]second){
-	int firstI = 0;
-	int secondI = 0;
-	int dataI = 0;
-	while(firstI < first.length && secondI < second.length){
-	    if(first[firstI] < second[secondI]){
-		data[dataI] = first[firstI];
-		firstI ++;
-		dataI ++;
-	    }else{
-		data[dataI] = second[secondI];
-		secondI ++;
-		dataI ++;
-	    }
+    public static void mergesort(int[]data,int start, int end, int element){
+	int mid = (start+end)/2;
+	if(end-start > element){
+	    mergesort(data,start,mid,element);
+	    mergesort(data,mid+1,end,element);
 	}
-	System.arraycopy(first,firstI,data,dataI,first.length-firstI);
-	System.arraycopy(second,secondI,data,dataI,second.length-secondI);
+	merge(data,start,mid,mid+1,end);
+	if(end+2*element > data.length){
+	    merger(data,start,data.length-1,element+1);
+	}else if (end+2*element == data.length-1){
+	    mergesort(data,start,end+2*element,element+1);
+	}
     }
 
+    public static void merge(int[]data, int startA, int endA, int startB, int endB){
+	int start = startA;
+	int[] temp = new int[(endA-startA+1) + (endB-startB+1)];
+	for(int i = 0; i < temp.length; i++){
+	    if(startA > endA){
+		temp[i] = data[startB];
+		startB++;
+	    }else if(startB > endB){
+		temp[i] = data[startA];
+		startA++;
+	    }else{
+		temp[i] = Math.min(data[startA], data[startB]);
+		if(temp[i] == data[startA]){
+		    startA++;
+		}else{
+		    startB++;
+		}
+	    }
+	}
+	for(int i = 0; i < temp.length; i++){
+	    data[start] = temp[i];
+	    start++;
+	}
+    }
 
     //testing
     public static void main(String[]args){
 	int[] x = {1,4,19,3,5,12};
 	printArray(x);
-	printArray(mergeSort(x));
+	mergesort(x);
+	printArray(x);
     }
 
 }
