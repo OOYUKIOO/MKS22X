@@ -88,15 +88,18 @@ public class Quick{
    
     private static void quickSort(int[]data, int left, int right){
 	printArray(data);
-	if(left<right){
-	    debug("The left index is "+left+"\nthe right index is "+right);
+	debug("The left index is "+left+"\nthe right index is "+right);
+ 	if(left<right){
 	    int[] offsets = partition(data,left,right);
 	    int leftOffset = offsets[0];
-	    int rightOffset = offsets[1];
-	    if(left>0 && left<data.length){
+ 	    int rightOffset = offsets[1];
+
+	    if(leftOffset>0 && leftOffset<data.length){
+		debug("doing left side");
 		quickSort(data,left,leftOffset);
-	    }
-	    if(right>0 && right<data.length){
+       	    }
+	    if(rightOffset>0 && rightOffset<data.length){
+		debug("doing right side "+rightOffset+", "+right);
 		quickSort(data,rightOffset,right);
 	    }
 	}
