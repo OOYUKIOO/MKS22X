@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.lang.System;
 public class Quick{
 
-    static boolean DEBUG = true;
+    static boolean DEBUG = false;
 
     private static void debug(String s){
 	if(DEBUG){
@@ -66,7 +66,7 @@ public class Quick{
 		copyright--;
 		debug("choosen element is greater than pivot");
 	    }
-	    printArray(copy);
+	    if(DEBUG){printArray(copy);}
 	}
 	debug("left index for copy array is "+copyleft+" and right index for copy array is "+copyright);
 	ans[0] = copyleft-1;
@@ -87,7 +87,7 @@ public class Quick{
     }
    
     private static void quickSort(int[]data, int left, int right){
-	printArray(data);
+	if(DEBUG){printArray(data);}
 	debug("The left index is "+left+"\nthe right index is "+right);
  	if(left<right){
 	    int[] offsets = partition(data,left,right);
@@ -139,7 +139,7 @@ public class Quick{
 	*/	
 
 
-	/*
+	
 	//runtime result, quickSort takes around 10 millisecond more
 	long startTimeX = System.currentTimeMillis();
 	quickSort(x);
@@ -153,7 +153,7 @@ public class Quick{
 			   "\nTime for array sort is : " + (endTimeY - startTimeY));
 
     }
-*/
-    }
+
 }
+
 
