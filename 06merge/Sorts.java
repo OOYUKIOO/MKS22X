@@ -77,8 +77,8 @@ public static void selectionSort(int[]data){
 	    mergesort(data,mid+1,end,element);
 	}
 	merge(data,start,mid,mid+1,end);
-	if(end+2*element > data.length){
-	    merger(data,start,data.length-1,element+1);
+	if(end+2*element < data.length){
+	    mergesort(data,start,data.length-1,element+1);
 	}else if (end+2*element == data.length-1){
 	    mergesort(data,start,end+2*element,element+1);
 	}
@@ -111,7 +111,7 @@ public static void selectionSort(int[]data){
 
     //testing
     public static void main(String[]args){
-	int[] x = {1,4,19,3,5,12};
+	int[] x = {0,4,7,31,2,3,3,6,12,10};
 	printArray(x);
 	mergesort(x);
 	printArray(x);
