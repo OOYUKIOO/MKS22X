@@ -3,6 +3,18 @@ public class MyLinkedList{
     LNode start;
     int size;
 
+    //constructor
+    public MyLinkedList(int size){
+	this.size = size;
+	if(size == 0){
+	    start = null;
+	}
+	for(int i = 0; i < size; i ++){
+	    start.setValue(0);
+	    start.setNext(start);
+	}
+    }
+
 
     public int add(){
 	return 0;
@@ -24,19 +36,26 @@ public class MyLinkedList{
     //inner class
     private class LNode{
 	int value;
-	int next;
+	LNode next;
 
-	public LNode(int value, int next){
+	public LNode(int value){
 	    this.value = value;
-	    this.next = next;
 	}
 
 	public int getValue(){
 	    return value;
 	}
 
-	public int getNext(){
+	public LNode getNext(){
 	    return next;
+	}
+
+	public void setValue(int newValue){
+	    value = newValue;
+	}
+
+	public void setNext(LNode newNext){
+	    next = newNext;
 	}
 
     }
