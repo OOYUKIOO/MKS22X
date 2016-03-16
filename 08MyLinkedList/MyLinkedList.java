@@ -6,15 +6,18 @@ public class MyLinkedList{
     //constructor
     public MyLinkedList(int size){
 	this.size = size;
-	if(size == 0){
-	    start = null;
-	}
-	for(int i = 0; i < size; i ++){
-	    start.setValue(0);
-	    start.setNext(start);
-	}
+	MyLinkedListH(size);
     }
 
+    public void MyLinkedListH(int size){
+	if(size == 0 ){
+	    start = null;
+	}else{
+	    start.setValue(0);
+	    MyLinkedList newStart = new MyLinkedList(size-1);
+	    start.setNext(newStart.start);
+	}
+    }
 
     public int add(){
 	return 0;
