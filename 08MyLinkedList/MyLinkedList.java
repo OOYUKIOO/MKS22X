@@ -34,8 +34,14 @@ public class MyLinkedList{
 	return true;
     }
 
-    public int get(){
-	return 0;
+    public int get(int pos){
+	int index = 0;
+	LNode temp = start;
+	while(index != pos){
+	    index++;
+	    temp = temp.getNext();
+	}
+	return temp.getValue();
     }
 
     public void set(){
@@ -91,6 +97,7 @@ public class MyLinkedList{
 	    list.add(i);
 	}
 	System.out.println(list);
+	System.out.println(list.get(4));
     }
 
 
