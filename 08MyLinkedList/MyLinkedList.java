@@ -3,14 +3,14 @@ public class MyLinkedList{
     LNode start;
     int size;
 
-    /*
+   
     //constructor
     public MyLinkedList(int size){
 	this.size = size;
 	MyLinkedListH(size);
     }
 
-    public void MyLinkedListH(int size){
+    /* public void MyLinkedListH(int size){
 	if(size == 0 ){
 	    start = null;
 	}else{
@@ -44,8 +44,14 @@ public class MyLinkedList{
 	return temp.getValue();
     }
 
-    public void set(){
-
+    public void set(int pos, int value){
+	int index = 0;
+	LNode temp = start;
+	while(index != pos){
+	    index++;
+	    temp = temp.getNext();
+	}
+	temp.setValue(value);
     }
 
     public String toString(){
@@ -96,6 +102,7 @@ public class MyLinkedList{
 	for(int i = 0; i < 21; i ++){
 	    list.add(i);
 	}
+	list.set(9,10);
 	System.out.println(list);
 	System.out.println(list.get(4));
     }
