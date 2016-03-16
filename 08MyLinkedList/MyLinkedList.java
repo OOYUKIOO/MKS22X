@@ -14,8 +14,8 @@ public class MyLinkedList{
 	    start = null;
 	}else{
 	    start.setValue(0);
-	    MyLinkedList newStart = new MyLinkedList(size-1);
-	    start.setNext(newStart.start);
+	    //	    MyLinkedList newStart = new MyLinkedList(size-1);
+	    start.setNext(new MyLinkedList(size-1).start);
 	}
     }
 
@@ -32,7 +32,18 @@ public class MyLinkedList{
     }
 
     public String toString(){
-	return "";
+	String ans = toString(start,"");
+	return ans;
+    }
+
+    public String toString(LNode node, String ans){
+	if (size > 0){
+	    ans += node.getValue();
+	    if(node.getNext() != null){
+		toString(node.getNext(),ans);
+	    }
+	}
+	return ans;
     }
 
 
