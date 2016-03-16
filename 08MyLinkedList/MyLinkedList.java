@@ -20,8 +20,18 @@ public class MyLinkedList{
 	}
     }
     */
-    public void add(int value){
-
+    public boolean add(int value){
+	if(start == null){
+	    start = new LNode(value);
+	}else{
+	    LNode temp = start;
+	    while(temp.getNext() != null){
+		temp = temp.getNext();
+	    }
+	    temp.setNext(new LNode(value));
+	}
+	size++;
+	return true;
     }
 
     public int get(){
@@ -33,19 +43,18 @@ public class MyLinkedList{
     }
 
     public String toString(){
-	String ans = toString(start,"");
-	return ans;
+	String ans = "[";
+	LNode temp = start;
+	while(temp != null){
+	    ans += temp.getValue();
+	    if(temp.getNext() != null){
+		ans+=", ";
+	    }
+	    temp = temp.getNext();
+	}
+	return ans+"]";
     }
 
-    public String toString(LNode node, String ans){
-	if (size > 0){
-	    ans += node.getValue();
-	    if(node.getNext() != null){
-		toString(node.getNext(),ans);
-	    }
-	}
-	return ans;
-    }
 
 
     //inner class
@@ -78,6 +87,9 @@ public class MyLinkedList{
     //test
     public static void main(String[]args){
 	MyLinkedList list = new MyLinkedList();
+	for(int i = 0; i < 21; i ++){
+	    list.add(i);
+	}
 	System.out.println(list);
     }
 
