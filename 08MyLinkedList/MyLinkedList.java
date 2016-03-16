@@ -3,6 +3,7 @@ public class MyLinkedList{
     LNode start;
     int size;
 
+    /*
     //constructor
     public MyLinkedList(int size){
 	this.size = size;
@@ -18,9 +19,9 @@ public class MyLinkedList{
 	    start.setNext(new MyLinkedList(size-1).start);
 	}
     }
+    */
+    public void add(int value){
 
-    public int add(){
-	return 0;
     }
 
     public int get(){
@@ -74,6 +75,11 @@ public class MyLinkedList{
 
     }
 
+    //test
+    public static void main(String[]args){
+	MyLinkedList list = new MyLinkedList();
+	System.out.println(list);
+    }
 
 
 }
