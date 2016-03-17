@@ -7,7 +7,11 @@ public class MyLinkedList{
     //constructor
     public MyLinkedList(int size){
 	this.size = size;
-	MyLinkedListH(size);
+	int length = 0;
+	while(length != size){
+	    add(0);
+	    length++;
+	}
     }
 
     /* public void MyLinkedListH(int size){
@@ -98,13 +102,14 @@ public class MyLinkedList{
 
     //test
     public static void main(String[]args){
-	MyLinkedList list = new MyLinkedList();
-	for(int i = 0; i < 21; i ++){
+	MyLinkedList list = new MyLinkedList(0);
+	/*	for(int i = 0; i < 21; i ++){
 	    list.add(i);
 	}
 	list.set(9,10);
+	*/
 	System.out.println(list);
-	System.out.println(list.get(4));
+	//	System.out.println(list.get(4));
     }
 
 
