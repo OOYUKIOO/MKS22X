@@ -5,32 +5,38 @@ public class MyLinkedList{
     int size;
 
 
-    boolean debug = true;
-    public void DEBUG(String s){
+    static boolean debug = true;
+    public static void DEBUG(String s){
 	if(debug){
 	    System.out.println(s);
 	}
 	    }
    
     //constructor
-    public MyLinkedList(int size){
-	this.size = size;
-	if(size != 0){
-	    int length = 0;
+    public MyLinkedList(int length){
+	//this.size = size;
+	if(length != 0){
+	    int iLength = 0;
 	    start = new LNode(0);
 	    end = start;
-	    while(length != size-1){
+	    while(iLength != length-1){
 		add(0);
 		DEBUG("got through one");
-		length++;
+		iLength++;
 		end = end.getNext();
 	    }
+	    size++;
 	}
+    }
+
+    public String getSize(){
+	return ""+size;
     }
 
     public boolean add(int value){
 	end.setNext(new LNode(value));
 	//	start.setNext(end);
+	size++;
 	return true;
     }
 
@@ -52,8 +58,7 @@ public class MyLinkedList{
 	    temp.setNext(newNode);
 	    newNode.setNext(after);
 	}
-
-
+	size++;
 	/*
 	if(start == null){
 	    start = new LNode(value);
@@ -134,8 +139,9 @@ public class MyLinkedList{
     //test
     public static void main(String[]args){
 	MyLinkedList list = new MyLinkedList(10);
-	list.add(0,5);
+	list.add(4,5);
 	System.out.println(list);
+	DEBUG(list.getSize());
 	//	System.out.println(list.get(4));
     }
 
