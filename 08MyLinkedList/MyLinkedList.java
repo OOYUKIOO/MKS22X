@@ -35,6 +35,26 @@ public class MyLinkedList{
     }
 
     public boolean add(int pos, int value){
+	LNode newNode = new LNode(value);
+	LNode temp = start;
+	LNode after;
+	int index = 0;
+	while(index < pos-1){
+	    temp = temp.getNext();
+	    index++;
+	}
+	if(pos == 0){
+	    after = temp;
+	    start = newNode;
+	    start.setNext(after);
+	}else{
+	    after = temp.getNext();
+	    temp.setNext(newNode);
+	    newNode.setNext(after);
+	}
+
+
+	/*
 	if(start == null){
 	    start = new LNode(value);
 	}else{
@@ -45,6 +65,7 @@ public class MyLinkedList{
 	    temp.setNext(new LNode(value));
 	}
 	size++;
+	*/
 	return true;
     }
 
@@ -113,6 +134,7 @@ public class MyLinkedList{
     //test
     public static void main(String[]args){
 	MyLinkedList list = new MyLinkedList(10);
+	list.add(0,5);
 	System.out.println(list);
 	//	System.out.println(list.get(4));
     }
