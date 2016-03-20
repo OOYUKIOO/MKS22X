@@ -21,7 +21,6 @@ public class MyLinkedList{
 	    end = start;
 	    while(iLength != length-1){
 		add(0);
-		DEBUG("got through one");
 		iLength++;
 		end = end.getNext();
 	    }
@@ -29,8 +28,8 @@ public class MyLinkedList{
 	}
     }
 
-    public String getSize(){
-	return ""+size;
+    public int getSize(){
+	return size;
     }
 
     public boolean add(int value){
@@ -53,25 +52,33 @@ public class MyLinkedList{
 	    after = temp;
 	    start = newNode;
 	    start.setNext(after);
+	}else if (pos == size-1){
+	    add(value);
 	}else{
 	    after = temp.getNext();
 	    temp.setNext(newNode);
 	    newNode.setNext(after);
 	}
 	size++;
-	/*
-	if(start == null){
-	    start = new LNode(value);
-	}else{
-	    LNode temp = start;
-	    while(temp.getNext() != null){
-		temp = temp.getNext();
-	    }
-	    temp.setNext(new LNode(value));
-	}
-	size++;
-	*/
 	return true;
+    }
+
+    public int remove(int pos){
+	int index = 0;
+	LNode temp = start;
+	int removed;
+	while(index < pos-1){
+	    temp = temp.getNext();
+	    index++;
+	}
+	if(pos == 0){
+	    removed = start.getValue();
+	    start = start.getNext();
+	}else{
+	    removed = temp.getNext().getValue();
+	    temp.setNext(temp.getNext().getNext());
+	}
+	return removed;
     }
 
     public int get(int pos){
@@ -140,8 +147,14 @@ public class MyLinkedList{
     public static void main(String[]args){
 	MyLinkedList list = new MyLinkedList(10);
 	list.add(4,5);
+	list.add(0,9);
+	list.add(11,8);
 	System.out.println(list);
-	DEBUG(list.getSize());
+	DEBUG(""+list.remove(5));
+	System.out.println(list);
+	DEBUG(""+list.remove(0));
+	DEBUG(""+list.remove(10));
+	System.out.println(list);
 	//	System.out.println(list.get(4));
     }
 
