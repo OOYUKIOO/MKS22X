@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyLinkedList{
 
     LNode start;
@@ -5,7 +6,7 @@ public class MyLinkedList{
     int size;
 
 
-    static boolean debug = true;
+    static boolean debug = false;;
     public static void DEBUG(String s){
 	if(debug){
 	    System.out.println(s);
@@ -44,6 +45,9 @@ public class MyLinkedList{
 	LNode temp = start;
 	LNode after;
 	int index = 0;
+	if(pos < 0 || pos >= getSize()){
+	    throw new IndexOutOfBoundsException();
+	}
 	while(index < pos-1){
 	    temp = temp.getNext();
 	    index++;
@@ -67,6 +71,12 @@ public class MyLinkedList{
 	int index = 0;
 	LNode temp = start;
 	int removed;
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
+	if(pos < 0 || pos >= getSize()){
+	    throw new IndexOutOfBoundsException();
+	}
 	while(index < pos-1){
 	    temp = temp.getNext();
 	    index++;
@@ -82,6 +92,12 @@ public class MyLinkedList{
     }
 
     public int get(int pos){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	if(pos < 0 || pos >= getSize()){
+	    throw new IndexOutOfBoundsException();
+	}
 	int index = 0;
 	LNode temp = start;
 	while(index != pos){
@@ -94,11 +110,32 @@ public class MyLinkedList{
     public void set(int pos, int value){
 	int index = 0;
 	LNode temp = start;
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	if(pos < 0 || pos >= getSize()){
+	    throw new IndexOutOfBoundsException();
+	}
 	while(index != pos){
 	    index++;
 	    temp = temp.getNext();
 	}
 	temp.setValue(value);
+    }
+
+    public int indexOf(int value){
+	LNode temp = start;
+	int index = 0;
+	while(index < getSize()-1){
+	    DEBUG(""+index);
+	    if(temp.getValue() == value){
+		return index;
+	    }else{
+		temp = temp.getNext();
+		index ++;
+	    }
+	}
+	    return -1;
     }
 
     public String toString(){
@@ -150,11 +187,9 @@ public class MyLinkedList{
 	list.add(0,9);
 	list.add(11,8);
 	System.out.println(list);
-	DEBUG(""+list.remove(5));
-	System.out.println(list);
-	DEBUG(""+list.remove(0));
-	DEBUG(""+list.remove(10));
-	System.out.println(list);
+	System.out.println(list.indexOf(0));
+	System.out.println(list.indexOf(8));
+	System.out.println(list.indexOf(20));
 	//	System.out.println(list.get(4));
     }
 
