@@ -7,7 +7,7 @@ public class MyLinkedList<T>{
     int size;
 
 
-    static boolean debug = false;
+    static boolean debug = true;
     public static void DEBUG(String s){
 	if(debug){
 	    System.out.println(s);
@@ -35,9 +35,13 @@ public class MyLinkedList<T>{
 	if(getSize() == 0){
 	    start = new LNode(item);
 	    start.setValue(value);
+	    end = start;
 	    size++;
 	}else{
 	    end.setNext(new LNode(value));
+	    DEBUG(""+end.getValue());
+	    DEBUG(""+end.getNext().getValue());
+	    end = end.getNext();
 	    size++;
 	}
 	return true;
@@ -124,7 +128,6 @@ public class MyLinkedList<T>{
 	    throw new NoSuchElementException();
 	}
 	if(pos < 0 || pos >= getSize()){
-	    DEBUG("out of bound");
 	    throw new IndexOutOfBoundsException();
 	}
 	while(index != pos){
@@ -138,7 +141,6 @@ public class MyLinkedList<T>{
 	LNode temp = start;
 	int index = 0;
 	while(index < getSize()){
-	    DEBUG(""+index);
 	    if(temp.getValue().equals(value)){
 		return index;
 	    }else{
@@ -164,7 +166,7 @@ public class MyLinkedList<T>{
 
     public String toString(boolean extra){
 	if(extra){
-	    return toString()+" head:"+start.getValue()+" tail:";
+	    return toString()+" head:"+start.getValue()+" tail:"+end.getValue();
 	}else{
 	    return toString();
 	}
@@ -203,14 +205,16 @@ public class MyLinkedList<T>{
     public static void main(String[]args){
 	
 	MyLinkedList<Integer> list = new MyLinkedList<Integer>(0);
+	DEBUG(""+list.getSize());
+	list.add(new Integer(2));
+	list.add(new Integer(3));
+	System.out.println(list);
+	System.out.println(list.toString(true));
+	/*
 	System.out.println(list);
 	list.add(0,new Integer(5));
 	System.out.println(list);
 	System.out.println(list.getSize());
-	System.out.println(list.toString(true));
-	
-
-	/*
 	System.out.println(list.indexOf(0));
 	System.out.println(list.indexOf(8));
 	System.out.println(list.indexOf(20));
