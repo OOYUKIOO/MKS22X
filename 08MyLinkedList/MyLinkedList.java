@@ -3,6 +3,7 @@ public class MyLinkedList<T>{
 
     LNode start;
     LNode end;
+    T item;
     int size;
 
 
@@ -16,17 +17,28 @@ public class MyLinkedList<T>{
     //constructor
     public MyLinkedList(int length){
 	//this.size = size;
+	/*
 	if(length != 0){
 	    int iLength = 0;
 	    T item;
-	    start = new LNode(new T());
+	    
+	    start = new LNode();
 	    end = start;
+	    
 	    while(iLength != length-1){
 		add(item);
 		iLength++;
 		end = end.getNext();
 	    }
 	    size++;
+	}
+	*/
+	size = 0;
+	start = new LNode(item);
+	end = start;
+	while(getSize() < length){
+	    add(item);
+	    end = end.getNext();
 	}
     }
 
