@@ -16,23 +16,6 @@ public class MyLinkedList<T>{
    
     //constructor
     public MyLinkedList(int length){
-	//this.size = size;
-	/*
-	if(length != 0){
-	    int iLength = 0;
-	    T item;
-	    
-	    start = new LNode();
-	    end = start;
-	    
-	    while(iLength != length-1){
-		add(item);
-		iLength++;
-		end = end.getNext();
-	    }
-	    size++;
-	}
-	*/
 	size = 0;
 	if(length != 0){
 	    start = new LNode(item);
@@ -82,7 +65,9 @@ public class MyLinkedList<T>{
 		after = temp.getNext();
 		temp.setNext(newNode);
 		newNode.setNext(after);
+
 	    }
+	    //	    start = temp;
 	    size++;
 	}
 	return true;
@@ -173,6 +158,14 @@ public class MyLinkedList<T>{
 	return ans+"]";
     }
 
+    public String toString(boolean extra){
+	if(extra){
+	    return toString()+" head:"+start.getValue()+" tail:";
+	}else{
+	    return toString();
+	}
+    }
+
 
 
     //inner class
@@ -204,10 +197,8 @@ public class MyLinkedList<T>{
 
     //test
     public static void main(String[]args){
+	
 	MyLinkedList<Integer> list = new MyLinkedList<Integer>(0);
-	//	list.add(5,new Integer(4));
-	//	list.add(0,9);
-	//	list.add(4,3);
 	System.out.println(list);
 	list.add(12,new Integer(2));
 	list.add(1,new Integer(4));
@@ -219,7 +210,9 @@ public class MyLinkedList<T>{
 	System.out.println(list);
 	System.out.println(list.indexOf(10));
 	list.remove(2);
-	System.out.println(list);
+	System.out.println(list.toString(true));
+	
+
 	/*
 	System.out.println(list.indexOf(0));
 	System.out.println(list.indexOf(8));
