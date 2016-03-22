@@ -1,12 +1,12 @@
 import java.util.*;
-public class MyLinkedList{
+public class MyLinkedList<T>{
 
     LNode start;
     LNode end;
     int size;
 
 
-    static boolean debug = false;;
+    static boolean debug = false;
     public static void DEBUG(String s){
 	if(debug){
 	    System.out.println(s);
@@ -18,10 +18,11 @@ public class MyLinkedList{
 	//this.size = size;
 	if(length != 0){
 	    int iLength = 0;
-	    start = new LNode(0);
+	    T item;
+	    start = new LNode(new T());
 	    end = start;
 	    while(iLength != length-1){
-		add(0);
+		add(item);
 		iLength++;
 		end = end.getNext();
 	    }
@@ -33,44 +34,46 @@ public class MyLinkedList{
 	return size;
     }
 
-    public boolean add(int value){
+    public boolean add(T value){
 	end.setNext(new LNode(value));
 	//	start.setNext(end);
 	size++;
 	return true;
     }
 
-    public boolean add(int pos, int value){
+    public boolean add(int pos, T value){
 	LNode newNode = new LNode(value);
 	LNode temp = start;
 	LNode after;
 	int index = 0;
 	if(pos < 0 || pos >= getSize()){
 	    throw new IndexOutOfBoundsException();
-	}
-	while(index < pos-1){
-	    temp = temp.getNext();
-	    index++;
-	}
-	if(pos == 0){
-	    after = temp;
-	    start = newNode;
-	    start.setNext(after);
-	}else if (pos == size-1){
-	    add(value);
+	    
 	}else{
-	    after = temp.getNext();
-	    temp.setNext(newNode);
-	    newNode.setNext(after);
+	    while(index < pos-1){
+		temp = temp.getNext();
+		index++;
+	    }
+	    if(pos == 0){
+		after = temp;
+		start = newNode;
+		start.setNext(after);
+	    }else if (pos == size-1){
+		add(value);
+	    }else{
+		after = temp.getNext();
+		temp.setNext(newNode);
+		newNode.setNext(after);
+	    }
+	    size++;
+	    return true;
 	}
-	size++;
-	return true;
     }
 
-    public int remove(int pos){
+    public T remove(int pos){
 	int index = 0;
 	LNode temp = start;
-	int removed;
+	T removed;
 	if (size == 0){
 	    throw new NoSuchElementException();
 	}
@@ -91,7 +94,7 @@ public class MyLinkedList{
 	return removed;
     }
 
-    public int get(int pos){
+    public T get(int pos){
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
@@ -107,13 +110,14 @@ public class MyLinkedList{
 	return temp.getValue();
     }
 
-    public void set(int pos, int value){
+    public void set(int pos, T value){
 	int index = 0;
 	LNode temp = start;
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
 	if(pos < 0 || pos >= getSize()){
+	    DEBUG("out of bound");
 	    throw new IndexOutOfBoundsException();
 	}
 	while(index != pos){
@@ -123,7 +127,7 @@ public class MyLinkedList{
 	temp.setValue(value);
     }
 
-    public int indexOf(int value){
+    public int indexOf(T value){
 	LNode temp = start;
 	int index = 0;
 	while(index < getSize()-1){
@@ -155,14 +159,14 @@ public class MyLinkedList{
 
     //inner class
     private class LNode{
-	int value;
+	T value;
 	LNode next;
 
-	public LNode(int value){
+	public LNode(T value){
 	    this.value = value;
 	}
 
-	public int getValue(){
+	public T getValue(){
 	    return value;
 	}
 
@@ -170,7 +174,7 @@ public class MyLinkedList{
 	    return next;
 	}
 
-	public void setValue(int newValue){
+	public void setValue(T newValue){
 	    value = newValue;
 	}
 
@@ -182,15 +186,16 @@ public class MyLinkedList{
 
     //test
     public static void main(String[]args){
-	MyLinkedList list = new MyLinkedList(10);
-	list.add(4,5);
-	list.add(0,9);
-	list.add(11,8);
+	MyLinkedList<Integer> list = new MyLinkedList<Integer>(10);
+	//	list.add(5,new Integer(4));
+	//	list.add(0,9);
+	//	list.add(4,3);
 	System.out.println(list);
+	/*
 	System.out.println(list.indexOf(0));
 	System.out.println(list.indexOf(8));
 	System.out.println(list.indexOf(20));
-	//	System.out.println(list.get(4));
+	*/
     }
 
 
