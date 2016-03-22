@@ -83,22 +83,22 @@ public class MyLinkedList<T>{
 	T removed;
 	if (size == 0){
 	    throw new NoSuchElementException();
-	}
-	if(pos < 0 || pos >= getSize()){
+	}else if(pos >= 0 && pos < getSize()){
+	    while(index < pos-1){
+		temp = temp.getNext();
+		index++;
+	    }
+	    if(pos == 0){
+		removed = start.getValue();
+		start = start.getNext();
+	    }else{
+		removed = temp.getNext().getValue();
+		temp.setNext(temp.getNext().getNext());
+	    }
+	    return removed;
+	}else{
 	    throw new IndexOutOfBoundsException();
 	}
-	while(index < pos-1){
-	    temp = temp.getNext();
-	    index++;
-	}
-	if(pos == 0){
-	    removed = start.getValue();
-	    start = start.getNext();
-	}else{
-	    removed = temp.getNext().getValue();
-	    temp.setNext(temp.getNext().getNext());
-	}
-	return removed;
     }
 
     public T get(int pos){
