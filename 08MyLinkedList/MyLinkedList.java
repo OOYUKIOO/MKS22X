@@ -34,11 +34,13 @@ public class MyLinkedList<T>{
 	}
 	*/
 	size = 0;
-	start = new LNode(item);
-	end = start;
-	while(getSize() < length-1){
-	    add(item);
-	    end = end.getNext();
+	if(length != 0){
+	    start = new LNode(item);
+	    end = start;
+	    while(getSize() < length-1){
+		add(item);
+		end = end.getNext();
+	    }
 	}
     }
 
@@ -47,9 +49,14 @@ public class MyLinkedList<T>{
     }
 
     public boolean add(T value){
-	end.setNext(new LNode(value));
-	//	start.setNext(end);
-	size++;
+	if(getSize() == 0){
+	    start = new LNode(item);
+	    start.setValue(value);
+	    size++;
+	}else{
+	    end.setNext(new LNode(value));
+	    size++;
+	}
 	return true;
     }
 
@@ -58,9 +65,8 @@ public class MyLinkedList<T>{
 	LNode temp = start;
 	LNode after;
 	int index = 0;
-	if(pos < 0 || pos >= getSize()){
-	    throw new IndexOutOfBoundsException();
-	    
+	if(getSize() == 0){
+	    add(value);
 	}else{
 	    while(index < pos-1){
 		temp = temp.getNext();
@@ -78,8 +84,8 @@ public class MyLinkedList<T>{
 		newNode.setNext(after);
 	    }
 	    size++;
-	    return true;
 	}
+	return true;
     }
 
     public T remove(int pos){
@@ -203,8 +209,9 @@ public class MyLinkedList<T>{
 	//	list.add(0,9);
 	//	list.add(4,3);
 	System.out.println(list);
-	list.add(new Integer(2));
+	list.add(12,new Integer(2));
 	System.out.println(list);
+	System.out.println(list.getSize());
 	/*
 	System.out.println(list.indexOf(0));
 	System.out.println(list.indexOf(8));
