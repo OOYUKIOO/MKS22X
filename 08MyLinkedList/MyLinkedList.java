@@ -48,29 +48,33 @@ public class MyLinkedList<T>{
 	LNode temp = start;
 	LNode after;
 	int index = 0;
-	if(getSize() == 0){
-	    add(value);
-	}else{
-	    while(index < pos-1){
-		temp = temp.getNext();
-		index++;
-	    }
-	    if(pos == 0){
-		after = temp;
-		start = newNode;
-		start.setNext(after);
-	    }else if (pos == size-1){
+	if(pos >= 0 && pos<=getSize()){
+	    if(getSize() == 0){
 		add(value);
 	    }else{
-		after = temp.getNext();
-		temp.setNext(newNode);
-		newNode.setNext(after);
+		while(index < pos-1){
+		    temp = temp.getNext();
+		    index++;
+		}
+		if(pos == 0){
+		    after = temp;
+		    start = newNode;
+		    start.setNext(after);
+		}else if (pos == size-1){
+		    add(value);
+		}else{
+		    after = temp.getNext();
+		    temp.setNext(newNode);
+		    newNode.setNext(after);
 
+		}
+		//	    start = temp;
+		size++;
 	    }
-	    //	    start = temp;
-	    size++;
+	    return true;
+	}else{
+	    throw new IndexOutOfBoundsException();
 	}
-	return true;
     }
 
     public T remove(int pos){
@@ -200,16 +204,9 @@ public class MyLinkedList<T>{
 	
 	MyLinkedList<Integer> list = new MyLinkedList<Integer>(0);
 	System.out.println(list);
-	list.add(12,new Integer(2));
-	list.add(1,new Integer(4));
 	list.add(0,new Integer(5));
 	System.out.println(list);
 	System.out.println(list.getSize());
-	System.out.println(list.get(2));
-	list.set(2,new Integer(10));
-	System.out.println(list);
-	System.out.println(list.indexOf(10));
-	list.remove(2);
 	System.out.println(list.toString(true));
 	
 
