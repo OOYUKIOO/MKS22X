@@ -148,9 +148,9 @@ public class MyLinkedList<T>{
     public int indexOf(T value){
 	LNode temp = start;
 	int index = 0;
-	while(index < getSize()-1){
+	while(index < getSize()){
 	    DEBUG(""+index);
-	    if(temp.getValue() == value){
+	    if(temp.getValue().equals(value)){
 		return index;
 	    }else{
 		temp = temp.getNext();
@@ -210,8 +210,16 @@ public class MyLinkedList<T>{
 	//	list.add(4,3);
 	System.out.println(list);
 	list.add(12,new Integer(2));
+	list.add(1,new Integer(4));
+	list.add(0,new Integer(5));
 	System.out.println(list);
 	System.out.println(list.getSize());
+	System.out.println(list.get(2));
+	list.set(2,new Integer(10));
+	System.out.println(list);
+	System.out.println(list.indexOf(10));
+	list.remove(2);
+	System.out.println(list);
 	/*
 	System.out.println(list.indexOf(0));
 	System.out.println(list.indexOf(8));
