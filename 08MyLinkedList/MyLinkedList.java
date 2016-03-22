@@ -36,7 +36,7 @@ public class MyLinkedList<T>{
 	size = 0;
 	start = new LNode(item);
 	end = start;
-	while(getSize() < length){
+	while(getSize() < length-1){
 	    add(item);
 	    end = end.getNext();
 	}
@@ -198,10 +198,12 @@ public class MyLinkedList<T>{
 
     //test
     public static void main(String[]args){
-	MyLinkedList<Integer> list = new MyLinkedList<Integer>(10);
+	MyLinkedList<Integer> list = new MyLinkedList<Integer>(0);
 	//	list.add(5,new Integer(4));
 	//	list.add(0,9);
 	//	list.add(4,3);
+	System.out.println(list);
+	list.add(new Integer(2));
 	System.out.println(list);
 	/*
 	System.out.println(list.indexOf(0));
