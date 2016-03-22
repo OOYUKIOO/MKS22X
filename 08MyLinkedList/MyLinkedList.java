@@ -53,7 +53,8 @@ public class MyLinkedList<T>{
 	LNode after;
 	int index = 0;
 	if(pos >= 0 && pos<=getSize()){
-	    if(getSize() == 0){
+	    if(getSize() == 0 || pos == getSize()){
+		DEBUG("triggered");
 		add(value);
 	    }else{
 		while(index < pos-1){
@@ -64,15 +65,12 @@ public class MyLinkedList<T>{
 		    after = temp;
 		    start = newNode;
 		    start.setNext(after);
-		}else if (pos == size-1){
-		    add(value);
 		}else{
 		    after = temp.getNext();
 		    temp.setNext(newNode);
 		    newNode.setNext(after);
 
 		}
-		//	    start = temp;
 		size++;
 	    }
 	    return true;
@@ -166,7 +164,7 @@ public class MyLinkedList<T>{
 
     public String toString(boolean extra){
 	if(extra){
-	    return toString()+" head:"+start.getValue()+" tail:"+end.getValue();
+	    return toString()+" size:"+getSize()+" head:"+start.getValue()+" tail:"+end.getValue();
 	}else{
 	    return toString();
 	}
@@ -209,6 +207,7 @@ public class MyLinkedList<T>{
 	list.add(new Integer(2));
 	list.add(new Integer(3));
 	System.out.println(list);
+	list.add(2,10);
 	System.out.println(list.toString(true));
 	/*
 	System.out.println(list);
