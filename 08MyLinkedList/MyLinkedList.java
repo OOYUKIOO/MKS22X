@@ -1,5 +1,5 @@
 import java.util.*;
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements Iterable<T>{
 
     LNode start;
     LNode end;
@@ -7,7 +7,7 @@ public class MyLinkedList<T>{
     int size;
 
 
-    static boolean debug = true;
+    static boolean debug = false;
     public static void DEBUG(String s){
 	if(debug){
 	    System.out.println(s);
@@ -15,6 +15,10 @@ public class MyLinkedList<T>{
 	    }
    
     //constructor
+    public MyLinkedList(){
+	this(new Integer(0));
+    }
+
     public MyLinkedList(int length){
 	size = 0;
 	if(length != 0){
@@ -39,8 +43,6 @@ public class MyLinkedList<T>{
 	    size++;
 	}else{
 	    end.setNext(new LNode(value));
-	    DEBUG(""+end.getValue());
-	    DEBUG(""+end.getNext().getValue());
 	    end = end.getNext();
 	    size++;
 	}
@@ -208,6 +210,33 @@ public class MyLinkedList<T>{
 	}
 
     }
+
+    //override
+    public Iterator<T> iterator(){
+	return new myIterator();
+    }
+
+    //inner class for iterator
+    private class myIterator implements Iterator<T>{
+	private LNode current;
+
+	public myIterator(){
+	    current = start;
+	}
+
+	public boolean hasNext(){
+	    return true;
+	}
+
+	public T next(){
+	    return current.getValue();
+	}
+
+	public void remove(){
+
+	}
+    }
+
 
     //test
     public static void main(String[]args){
