@@ -35,5 +35,63 @@ public class Driver{
         }catch(IndexOutOfBoundsException e){
 	    System.out.println("out of bound caught for SET");
         }
+	//replace toString(true) with a debug to string that shows the head/tail
+        System.out.println(m.toString(true));
+        System.out.println(n);
+
+        //test removing from head/tail/middle
+        m.remove(0);
+        n.remove(0);
+        System.out.println(m.toString(true));
+        System.out.println(n);
+
+        m.remove(2);
+        n.remove(2);
+        System.out.println(m.toString(true));
+        System.out.println(n);
+
+        m.remove(m.getSize()-1);
+        n.remove(n.size()-1);
+        System.out.println(m.toString(true));
+        System.out.println(n);
+
+        //test adding to end/start
+        m.add(0,"START");
+        n.add(0,"START");
+        m.add(m.getSize(),"PENULTIMATE");
+        n.add(n.size(),"PENULTIMATE");
+        System.out.println(m.toString(true));
+        System.out.println(n);
+
+        //test add
+        m.add("Z-END!");
+        n.add("Z-END!");
+        System.out.println(m.toString(true));
+        System.out.println(n);
+
+        //test remove random items:
+        Random rand = new Random(0);
+        for(int i = 0; i < 6000; i++){
+            int op = rand.nextInt(4);
+
+            if(op == 0 || n.size()==0){//ensure never empty
+                n.add(""+i);
+                m.add(""+i);
+            }else if(op == 1 ){
+                int x = rand.nextInt(n.size());
+                n.add(x,""+i);
+                m.add(x,""+i);
+            }else{
+                int x = rand.nextInt(n.size());
+                if(!n.remove(x).equals(m.remove(x))){
+                    System.out.println("Non matching elements removed\n");
+                    System.exit(1);
+                }
+            }
+        }
+        System.out.println(m.toString(true));
+        System.out.println(n);
+
+
     }
 }
