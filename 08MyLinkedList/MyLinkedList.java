@@ -92,10 +92,20 @@ public class MyLinkedList<T>{
 	    }
 	    if(pos == 0){
 		removed = start.getValue();
-		start = start.getNext();
+		if(getSize() == 1){
+		    start = new LNode(item);
+		    end = start;
+		}else{
+		    start = start.getNext();
+		}
+		size--;
 	    }else{
+		if(pos == getSize()-1){
+		    end = temp;
+		}
 		removed = temp.getNext().getValue();
 		temp.setNext(temp.getNext().getNext());
+		size--;
 	    }
 	    return removed;
 	}else{
@@ -203,12 +213,19 @@ public class MyLinkedList<T>{
     public static void main(String[]args){
 	
 	MyLinkedList<Integer> list = new MyLinkedList<Integer>(0);
+	System.out.println(list);
 	DEBUG(""+list.getSize());
 	list.add(new Integer(2));
 	list.add(new Integer(3));
 	System.out.println(list);
 	list.add(2,10);
 	System.out.println(list.toString(true));
+	list.set(2,5);
+	list.remove(2);
+	list.remove(1);
+	list.remove(0);
+	System.out.println(list.toString(true));
+
 	/*
 	System.out.println(list);
 	list.add(0,new Integer(5));
