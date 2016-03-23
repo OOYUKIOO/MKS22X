@@ -225,15 +225,26 @@ public class MyLinkedList<T> implements Iterable<T>{
 	}
 
 	public boolean hasNext(){
-	    return true;
+	    if(current.getNext() != null){
+		return true;
+	    }else{
+		return false;
+	    }
 	}
 
 	public T next(){
-	    return current.getValue();
+	    T ans;
+	    if(hasNext()){
+		current = current.getNext();
+		ans = current.getValue();
+	    }else{
+		throw new NoSuchElementException();
+	    }
+	    return ans;
 	}
 
 	public void remove(){
-
+	    throw new UnsupportedOperationException();
 	}
     }
 
