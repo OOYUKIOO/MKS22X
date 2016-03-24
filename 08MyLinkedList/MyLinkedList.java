@@ -233,13 +233,15 @@ public class MyLinkedList<T> implements Iterable<T>{
 
 	public T next(){
 	    T ans;
-	    if(hasNext()){
-		current = current.getNext();
+	    if(getSize()>0){
 		ans = current.getValue();
+		if(hasNext()){
+		    current = current.getNext();
+		}
+		return ans;
 	    }else{
 		throw new NoSuchElementException();
 	    }
-	    return ans;
 	}
 
 	public void remove(){
@@ -252,7 +254,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public static void main(String[]args){
 	
 	MyLinkedList<Integer> list = new MyLinkedList<Integer>(4);
-
+	System.out.println(list);
 	for(Integer i : list){
 	    System.out.println(i);
 	}
