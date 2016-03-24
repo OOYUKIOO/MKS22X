@@ -217,22 +217,26 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     //inner class for iterator
     private class myIterator implements Iterator<T>{
-	private LNode current;
+	private LNode next   ;
 
 	public myIterator(){
-	    current = start;
+	    next = start;
 	}
 
 	public boolean hasNext(){
-	    if(getSize()>0 && current.getNext() != null){
-		return true;
-	    }else{
-		return false;
-	    }
+	    return next != null;
 	}
 
 	public T next(){
 	    T ans;
+	    if(hasNext()){
+		ans = next.getValue();
+		next = next.getNext();
+		return ans;
+	    }else{
+		throw new NoSuchElementException();
+	    }
+	    /*
 	    if(getSize()>0){
 		ans = current.getValue();
 		if(hasNext()){
@@ -242,6 +246,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    }else{
 		throw new NoSuchElementException();
 	    }
+	    */
 	}
 
 	public void remove(){
