@@ -24,9 +24,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 	if(length != 0){
 	    start = new LNode(item);
 	    end = start;
-	    while(getSize() < length-1){
+	    while(getSize() < length){
 		add(item);
-		end = end.getNext();
 	    }
 	}
     }
@@ -37,9 +36,9 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public boolean add(T value){
 	if(getSize() == 0){
-	    start = new LNode(item);
-	    start.setValue(value);
-	    end = start;
+	    start = new LNode(value);
+	    //	    start.setValue(value);
+	     end = start;
 	    size++;
 	}else{
 	    end.setNext(new LNode(value));
@@ -225,7 +224,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	}
 
 	public boolean hasNext(){
-	    if(current.getNext() != null){
+	    if(getSize()>0 && current.getNext() != null){
 		return true;
 	    }else{
 		return false;
@@ -252,7 +251,13 @@ public class MyLinkedList<T> implements Iterable<T>{
     //test
     public static void main(String[]args){
 	
-	MyLinkedList<Integer> list = new MyLinkedList<Integer>(0);
+	MyLinkedList<Integer> list = new MyLinkedList<Integer>(4);
+
+	for(Integer i : list){
+	    System.out.println(i);
+	}
+
+	/*
 	System.out.println(list);
 	DEBUG(""+list.getSize());
 	list.add(new Integer(2));
@@ -265,9 +270,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 	list.remove(1);
 	list.remove(0);
 	System.out.println(list.toString(true));
-
-	/*
-	System.out.println(list);
 	list.add(0,new Integer(5));
 	System.out.println(list);
 	System.out.println(list.getSize());
