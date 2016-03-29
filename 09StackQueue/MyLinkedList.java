@@ -261,15 +261,19 @@ public class MyLinkedList<T> implements Iterable<T>{
 
 	public void enqueue(T item){
 	    queue.add(item);
+	    size++;
 	}
 
 	
 	public T dequeue(){
-	    return item;
+	    T ans = queue.get(0);
+	    queue.remove(0);
+	    size--;
+	    return ans;
 	}
 
 	public T peek(){
-	    return item;
+	    return queue.get(0);
 	}
 
 	public int size(){
@@ -277,16 +281,34 @@ public class MyLinkedList<T> implements Iterable<T>{
 	}
 
 	public boolean isEmpty(){
-	    return true;
+	    if(size == 0){
+		return true;
+	    }else{
+		return false;
+	    }
 	}
 	
+	public String toString(){
+	    String ans = queue.toString();
+	    return ans;
+	}
 
     }
 
     //testing
     public static void main(String[]args){
-	MyQueue x = new MyQueue();
-	System.out.println(x.toString());
+	MyQueue<Integer> x = new MyQueue<Integer>();
+	System.out.println(x);
+        for(int i = 0; i < 20; i ++){
+	    x.enqueue(new Integer(i));
+	}
+	System.out.println(x);
+	System.out.println(x.dequeue());
+	System.out.println(x.dequeue());
+	System.out.println(x.dequeue());
+	System.out.println(x.peek());
+	System.out.println(x);
+	System.out.println(x.size());
     }
 
 }
