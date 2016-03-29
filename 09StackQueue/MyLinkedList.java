@@ -266,10 +266,14 @@ public class MyLinkedList<T> implements Iterable<T>{
 
 	
 	public T dequeue(){
-	    T ans = queue.get(0);
-	    queue.remove(0);
-	    size--;
-	    return ans;
+	    if(isEmpty()){
+		throw new NoSuchElementException();
+	    }else{
+		T ans = queue.get(0);
+		queue.remove(0);
+		size--;
+		return ans;
+	    }
 	}
 
 	public T peek(){
@@ -297,18 +301,31 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     //testing
     public static void main(String[]args){
-	MyQueue<Integer> x = new MyQueue<Integer>();
-	System.out.println(x);
-        for(int i = 0; i < 20; i ++){
-	    x.enqueue(new Integer(i));
-	}
-	System.out.println(x);
-	System.out.println(x.dequeue());
-	System.out.println(x.dequeue());
-	System.out.println(x.dequeue());
-	System.out.println(x.peek());
-	System.out.println(x);
-	System.out.println(x.size());
+
+	boolean debugQueue = false;
+	boolean debugStack = true;
+
+	if(debugQueue){
+	    MyQueue<Integer> x = new MyQueue<Integer>();
+	    System.out.println(x);
+	    try{
+		x.dequeue();
+	    }catch(NoSuchElementException e){
+		System.out.println("Gotcha!");
+	    }
+	    System.out.println(x.isEmpty());
+	    for(int i = 0; i < 20; i ++){
+		x.enqueue(new Integer(i));
+	    }
+	    System.out.println(x);
+	    System.out.println(x.dequeue());
+	    System.out.println(x.dequeue());
+	    System.out.println(x.dequeue());
+	    System.out.println(x.peek());
+	    System.out.println(x);
+	    System.out.println(x.size());
+	    System.out.println(x.isEmpty());
+ 	}
     }
 
 }
