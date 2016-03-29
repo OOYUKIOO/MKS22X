@@ -49,6 +49,22 @@ public class MyStack<T>{
 	    return false;
 	}
     }
+
+    public int indexOf(T item){
+	return stack.indexOf(item);
+    }
+
+    public static boolean isMatching(String s){
+	String open = "({[<";
+	String close = ")}]>";
+	MyStack<String> parens = new MyStack<String>(s.length());
+	for(int i = 0; i < s.length(); i ++){
+	    parens.push(s.substring(i,i+1));
+	    String current = parens.peek();
+	    int pos = 0;
+	}
+	return true;
+    }
 	
     public String toString(){
 	String ans = stack.toString();
