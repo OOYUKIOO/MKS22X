@@ -57,13 +57,21 @@ public class MyStack<T>{
     public static boolean isMatching(String s){
 	String open = "({[<";
 	String close = ")}]>";
-	MyStack<String> parens = new MyStack<String>(s.length());
+	MyStack<String> parens = new MyStack<String>();
 	for(int i = 0; i < s.length(); i ++){
-	    parens.push(s.substring(i,i+1));
-	    String current = parens.peek();
-	    int pos = 0;
+	    String current = s.substring(i,i+1);
+	    int pos = close.indexOf(current);
+	    if(pos>=0){
+		if(!parens.isEmpty() && 
+		   open.substring(pos,pos+1).equals(parens.peek())){
+		    parens.pop();
+		}else{
+		    parens.push(current);
+		}
+	    }
+	    System.out.println(parens);
 	}
-	return true;
+	return parens.isEmpty();
     }
 	
     public String toString(){
@@ -73,6 +81,9 @@ public class MyStack<T>{
     
     public static void main(String[]args){	
 
+
+	String input = "()()(([[]]))";
+	System.out.println(isMatching(input));
 	boolean debug = false;
 
 	if(debug){
