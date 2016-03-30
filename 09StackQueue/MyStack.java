@@ -60,8 +60,10 @@ public class MyStack<T>{
 	MyStack<String> parens = new MyStack<String>();
 	for(int i = 0; i < s.length(); i ++){
 	    String current = s.substring(i,i+1);
+	    System.out.println("current: "+current);
 	    int pos = close.indexOf(current);
 	    if(pos>=0){
+		System.out.println(i+" "+parens.isEmpty());
 		if(!parens.isEmpty() && 
 		   open.substring(pos,pos+1).equals(parens.peek())){
 		    parens.pop();
