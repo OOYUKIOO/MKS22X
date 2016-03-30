@@ -3,7 +3,14 @@ public class MyStack<T>{
     private int size;
     private T item;
     private MyLinkedList<T> stack;
-	
+    private static boolean debugMatch = false;	
+
+    public static void DEBUG(String s){
+	if(debugMatch){
+	    System.out.println(s);
+	}
+    }
+
     public MyStack(){
 	this(0);
     }
@@ -60,20 +67,21 @@ public class MyStack<T>{
 	MyStack<String> parens = new MyStack<String>();
 	for(int i = 0; i < s.length(); i ++){
 	    String current = s.substring(i,i+1);
-	    int pos = close.indexOf(current);
-	    System.out.println("current: "+current+"; pos: "+pos);
-	    if(pos>=0){
-		System.out.println(i+" "+parens.isEmpty()+open.substring(pos,pos+1));
+	    int posClose = close.indexOf(current);
+	    int posOpen = open.indexOf(current);
+	    DEBUG("current: "+current+"; pos: "+posClose);
+	    if(posClose>=0){
+		DEBUG(i+" "+parens.isEmpty()+open.substring(posClose,posClose+1));
 		if(!parens.isEmpty() && 
-		   open.substring(pos,pos+1).equals(parens.peek())){
+		   open.substring(posClose,posClose+1).equals(parens.peek())){
 		    parens.pop();
 		}else{
 		    parens.push(current);
 		}
-	    }else{
+	    }else if(posOpen >= 0){
 		parens.push(current);
 	    }
-	    System.out.println(parens);
+	    DEBUG(parens.toString());
 	}
 	return parens.isEmpty();
     }
@@ -87,6 +95,9 @@ public class MyStack<T>{
 
 
 	String input = "()()(([[]]))";
+	if(args.length > 0){
+	    input = args[0];
+	}
 	System.out.println(isMatching(input));
 	boolean debug = false;
 
