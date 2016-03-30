@@ -93,15 +93,27 @@ public class MyStack<T>{
     
     public static void main(String[]args){	
 
-
-	String input = "()()(([[]]))";
-	if(args.length > 0){
-	    input = args[0];
+	Stack<Integer> model = new Stack<Integer>();
+	MyStack test<Integer> = new MyStack<Integer>();
+	Random rand = new Random();
+	for(int i = 0; i < 10; i++){
+	    int command =rand.nextInt(4);
+	    //	    System.out.println(""+command);
+	    if(command == 0){
+		Stack.push(i);
+		MyStack.push(i);
+	    }
 	}
-	System.out.println(isMatching(input));
-	boolean debug = false;
 
+	boolean debug = false;
 	if(debug){
+	    String input = "()()(([[]]))";
+	    if(args.length > 0){
+		input = args[0];
+	    }
+	    System.out.println(isMatching(input));
+
+
 	    MyStack<Integer> x = new MyStack<Integer>();
 	    System.out.println(x);
 	    try{
