@@ -40,7 +40,11 @@ public class MyLinkedList<T> implements Iterable<T>{
 	     end = start;
 	    size++;
 	}else{
-	    end.setNext(new LNode(value));
+	    //new	   
+	    LNode newNode = new LNode(value);
+	    newNode.setPrevious(end);
+	    end.setNext(newNode);
+	    //	    end.getNext().setPrevious(end);
 	    end = end.getNext();
 	    size++;
 	}
@@ -54,7 +58,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 	int index = 0;
 	if(pos >= 0 && pos<=getSize()){
 	    if(getSize() == 0 || pos == getSize()){
-		DEBUG("triggered");
 		add(value);
 	    }else{
 		while(index < pos-1){
@@ -64,9 +67,15 @@ public class MyLinkedList<T> implements Iterable<T>{
 		if(pos == 0){
 		    after = temp;
 		    start = newNode;
+		    //new
+		    after.setPrevious(start);
 		    start.setNext(after);
+		    //		    start.getNext().setPrevious();
 		}else{
 		    after = temp.getNext();
+		    //new
+		    after.setPrevious(newNode);
+		    newNode.setPrevious(temp);
 		    temp.setNext(newNode);
 		    newNode.setNext(after);
 
@@ -255,6 +264,13 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     //testing
     public static void main(String[]args){
+
+	MyLinkedList<Integer> test = new MyLinkedList<Integer>(0);
+	for(int i = 0; i < 10; i++){
+	    test.add(new Integer(i));
+	}
+	System.out.println(test.end.getPrevious().getValue());
+	System.out.println(test);
 
     }
 
