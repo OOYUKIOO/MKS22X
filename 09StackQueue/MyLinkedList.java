@@ -105,6 +105,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 		    start = new LNode(item);
 		    end = start;
 		}else{
+		    //new
+		    start.getNext().setPrevious(null);
 		    start = start.getNext();
 		}
 		size--;
@@ -113,6 +115,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 		    end = temp;
 		}
 		removed = temp.getNext().getValue();
+		//new
+		temp.getNext().getNext().setPrevious(temp);
 		temp.setNext(temp.getNext().getNext());
 		size--;
 	    }
@@ -265,13 +269,20 @@ public class MyLinkedList<T> implements Iterable<T>{
     //testing
     public static void main(String[]args){
 
-	MyLinkedList<Integer> test = new MyLinkedList<Integer>(0);
-	for(int i = 0; i < 10; i++){
-	    test.add(new Integer(i));
+	if(debug){
+	    MyLinkedList<Integer> test = new MyLinkedList<Integer>(0);
+	    for(int i = 0; i < 20; i++){
+		test.add(new Integer(i));
+	    }
+	    System.out.println(test.end.getPrevious().getValue());
+	    System.out.println(test.start.getNext().getPrevious().getValue());
+	    System.out.println(test);
+	    for(int i = 0; i < 14; i++){
+		System.out.println("Removed element is: "+test.remove(0));
+		System.out.println("First element is: "+test.start.getNext().getPrevious().getValue());
+	    }
 	}
-	System.out.println(test.end.getPrevious().getValue());
-	System.out.println(test);
-
+	
     }
-
+    
 }
