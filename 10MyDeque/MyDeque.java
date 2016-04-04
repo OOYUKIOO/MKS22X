@@ -26,11 +26,22 @@ public class MyDeque<T>{
 
     public void addFirst(T value){
 	circular[start] = value;
-	start++;
+	start--;
+	if(start < 0){
+	    start = circular.length-1;
+	}
+    }
+
+    public void addLast(T value){
+	circular[end] = value;
+	end++;
     }
 
 
 
+    public int getSize(){
+	return size;
+    }
 
     public String toString(){
 	String ans = "[";
@@ -40,12 +51,23 @@ public class MyDeque<T>{
 	return(ans.substring(0,ans.length()-1)+"]");
     }
 
+    public void debugString(){
+	System.out.println(toString()+", size="+getSize()+", start ="+start+", end="+end);
+    }
+
 
 
     //testing
     public static void main(String[]args){
-	MyDeque x = new MyDeque();
-	System.out.println(x);
+	MyDeque<Integer> x = new MyDeque<Integer>();
+	for(int i = 0; i<4; i++){
+	    x.addFirst(new Integer(i));
+	}
+	x.debugString();
+	for(int i = 0; i<5; i++){
+	    x.addLast(new Integer(i));
+	}
+	x.debugString();
     }
 
 }
