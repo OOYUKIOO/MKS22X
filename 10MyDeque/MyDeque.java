@@ -80,6 +80,20 @@ public class MyDeque<T>{
 	return ans;
     }
 
+    public T getFirst(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return circular[start];
+    }
+
+    public T getLast(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return circular[end];
+    }
+
     public int getSize(){
 	return size;
     }
@@ -104,21 +118,32 @@ public class MyDeque<T>{
 	for(int i = 0; i<5; i++){
 	    x.addFirst(new Integer(i));
 	}
-	x.debugString();
 	for(int i = 0; i<4; i++){
 	    x.addLast(new Integer(i));
 	}
 	x.debugString();
+	System.out.println("First element is: "+x.getFirst() + "\n" +
+			   "Last Element is: "+x.getLast());
+	//resize here
 	x.addLast(4);
 	x.debugString();
+	System.out.println("First element is: "+x.getFirst() + "\n" +
+			   "Last Element is: "+x.getLast());
 	for(int i = 0; i<3; i++){
 	    x.removeFirst();
 	}
-	x.debugString();
 	for(int i = 0; i<4; i++){
 	    x.removeLast();
 	}
-	x.debugString();
+	for(int i = 0; i<5; i++){
+	    try{
+		x.removeFirst();
+		x.debugString();
+	    }catch(NoSuchElementException e){
+		System.out.println("Caught remove excption");
+	    }
+	}
+
     }
 
 }
