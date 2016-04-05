@@ -19,16 +19,17 @@ public class MyDeque<T>{
     private void resize(){
 	T[] newCircular = (T[])new Object[size*2];
 	end = 0;
-	for (int i = start; i<circular.length; i++){
-	    newCircular[i-start] = circular[i];
+	for (int i = 0; i<size; i++){
+	    if(start==circular.length){
+		start=0;
+	    }
+	    if(circular[start] == null){
+		start++;
+	    }
+	    newCircular[i] = circular[start];
+	    start++;
 	    end++;
 	}
-	/*
-	for (int i = 0; i<start; i++){
-	    newCircular[start+1+i]=circular[i];
-	    end++;
-	}
-	*/
 	start = 0;
 	circular = newCircular;
     }
@@ -104,9 +105,11 @@ public class MyDeque<T>{
 	    x.addFirst(new Integer(i));
 	}
 	x.debugString();
-	for(int i = 0; i<5; i++){
+	for(int i = 0; i<4; i++){
 	    x.addLast(new Integer(i));
 	}
+	x.debugString();
+	x.addLast(4);
 	x.debugString();
 	for(int i = 0; i<3; i++){
 	    x.removeFirst();
