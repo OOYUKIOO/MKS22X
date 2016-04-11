@@ -4,15 +4,18 @@ public class FrontierQueue<T> implements Frontier<T>{
     MyQueue<T> queue = new MyQueue<T>();
 
     public void add(T value){
-
+	queue.enqueue(value);
     }
 
     public T next(){
-	return null;
+	if(hasNext()){
+	    return queue.dequeue();
+	}
+	throw new NoSuchElementException();
     }
 
     public boolean hasNext(){
-	return true;
+	return !queue.isEmpty();
     }
 
     public String toString(){
