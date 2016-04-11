@@ -8,11 +8,14 @@ public class FrontierStack<T> implements Frontier<T>{
     }
 
     public T next(){
-	return null;
+	if(hasNext()){
+	    return stack.pop();
+	}
+	throw new NoSuchElementException();
     }
 
     public boolean hasNext(){
-	return true;
+	return !stack.isEmpty();
     }
 
 
