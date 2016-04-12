@@ -51,6 +51,10 @@ public class BetterMaze{
         /** IMPLEMENT THIS **/  
 	return false;
     }    
+
+
+    //solve helper function
+
      
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
