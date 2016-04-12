@@ -12,7 +12,12 @@ public class Node{
 	this.prev = prev;
     }
 
+    public int getValue(){
+	return id;
+    }
 
-
+    public Node getPrev(){
+	return prev;
+    }
 
 }
