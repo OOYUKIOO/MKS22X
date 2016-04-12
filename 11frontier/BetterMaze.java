@@ -21,16 +21,19 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
     **/
     public int[] solutionCoordinates(){
-        /** IMPLEMENT THIS **/      
-	return new int[1];
+	int[] ans = new int[solution.length];
+	for(int i = 0; i < solution.length; i++){
+	    ans[i] = solution[i];
+	}
+	return ans;
     }    
 
 
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
-	return false;
+	placesToGo = new FrontierQueue<Node>();
+	return true;        
     }   
 
 
