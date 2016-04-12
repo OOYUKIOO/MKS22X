@@ -1,19 +1,15 @@
 public class Node{
 
-    private int id;
+    private int[] coord;
     private Node prev;
 
-    public Node(){
-	this(0,null);
-    }
-
-    public Node(int id, Node prev){
-	this.id = id;
+    public Node(int[] coord, Node prev){
+	this.coord = coord;
 	this.prev = prev;
     }
 
-    public int getValue(){
-	return id;
+    public int[] getValue(){
+	return coord;
     }
 
     public Node getPrev(){
