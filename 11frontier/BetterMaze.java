@@ -33,15 +33,15 @@ public class BetterMaze{
     **/
     public boolean solveBFS(){  
 	placesToGo = new FrontierQueue<Node>();
-	return true;        
+	return solve();        
     }   
 
 
    /**initialize the frontier as a stack and call solve
     */ 
     public boolean solveDFS(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+        placesToGo = new FrontierStack<Node>();
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
