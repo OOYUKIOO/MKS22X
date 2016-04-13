@@ -51,10 +51,17 @@ public class BetterMaze{
 
 
     //solve helper function
-    public void solveH(int[] coord){
+    private void solveH(int[] coord){
 
     }
 
+    private boolean goal(int[] coord){
+	char current = maze[coord[0]][coord[1]];
+	if(current == 'E'){
+	    return true;
+	}
+	return false;
+    }
 
     private boolean canMove(int[] coord){
     char next = maze[coord[0]][coord[1]];
@@ -64,7 +71,7 @@ public class BetterMaze{
 	return false;
     }
      
-    public int[] moveLeft(int[] coord){
+    private int[] moveLeft(int[] coord){
 	int row = coord[0];
 	int col = coord[1]-1;
 	if(col < maze[0].length && col >= 0){
@@ -76,7 +83,7 @@ public class BetterMaze{
 	}
     }
 
-    public int[] moveRight(int[] coord){
+    private int[] moveRight(int[] coord){
 	int row = coord[0];
 	int col = coord[1]+1;
 	if(col < maze[0].length && col >= 0){
@@ -88,7 +95,7 @@ public class BetterMaze{
 	}
     }
 
-    public int[] moveUp(int[] coord){
+    private int[] moveUp(int[] coord){
 	int row = coord[0]-1;
 	int col = coord[1];
 	if(row < maze.length && row >= 0){
@@ -101,7 +108,7 @@ public class BetterMaze{
     }
 
 
-    public int[] moveDown(int[] coord){
+    private int[] moveDown(int[] coord){
 	int row = coord[0]+1;
 	int col = coord[1];
 	if(row < maze.length && row >= 0){
@@ -112,6 +119,8 @@ public class BetterMaze{
 	    return ans;
 	}
     }
+
+
 
 
 
