@@ -2,9 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class BetterMaze{
-    private class Node{
-
-    }
 
     private char[][] maze;
     private int[]    solution;
@@ -54,8 +51,32 @@ public class BetterMaze{
 
 
     //solve helper function
+    public void solveH(int[] coord){
 
+    }
+
+
+    private boolean canMove(int[] coord){
+    char next = maze[coord[0]][coord[1]];
+	if(next == ' ' || next == 'E'){
+	    return true;
+	}
+	return false;
+    }
      
+    public int[] moveLeft(int[] coord){
+	int row = coord[0];
+	int col = coord[1]-1;
+	if(col < maze[0].length && col >= 0){
+	    int[] ans = {row,col};
+	    return ans;
+	}else{
+	    int[] ans = new int[0];
+	    return ans;
+	}
+    }
+
+
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
 
@@ -156,7 +177,10 @@ public class BetterMaze{
     } 
     
 
+    public static void main(String[]args){
+	BetterMaze a = new BetterMaze("data1.dat");
 
+    }
        
     
     
