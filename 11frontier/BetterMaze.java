@@ -76,6 +76,44 @@ public class BetterMaze{
 	}
     }
 
+    public int[] moveRight(int[] coord){
+	int row = coord[0];
+	int col = coord[1]+1;
+	if(col < maze[0].length && col >= 0){
+	    int[] ans = {row,col};
+	    return ans;
+	}else{
+	    int[] ans = new int[0];
+	    return ans;
+	}
+    }
+
+    public int[] moveUp(int[] coord){
+	int row = coord[0]-1;
+	int col = coord[1];
+	if(row < maze.length && row >= 0){
+	    int[] ans = {row,col};
+	    return ans;
+	}else{
+	    int[] ans = new int[0];
+	    return ans;
+	}
+    }
+
+
+    public int[] moveDown(int[] coord){
+	int row = coord[0]+1;
+	int col = coord[1];
+	if(row < maze.length && row >= 0){
+	    int[] ans = {row,col};
+	    return ans;
+	}else{
+	    int[] ans = new int[0];
+	    return ans;
+	}
+    }
+
+
 
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
