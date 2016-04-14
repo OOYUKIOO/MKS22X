@@ -20,17 +20,30 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
     **/
     public int[] solutionCoordinates(){
+	solutionLen = solutionLen*2;
 	solution = new int[solutionLen];
 	int[] ans = new int[solutionLen];
 	int index = 0;
 	while(ref != null){
 	    solution[index] = ref.getValue()[0];
 	    solution[index+1] = ref.getValue()[1];
+	    if(ref.getPrev()!=null){
+		System.out.println("added " +
+				   ref.getPrev().getValue()[0] + ", "
+				   +ref.getPrev().getValue()[1]);
+	    }
 	    index+=2;
 	    ref = ref.getPrev();
 	}
-	for(int i = solutionLen-1; i < 0; i--){
-	    ans[i] = solution[(solutionLen-1)-i];
+	for(int i = solutionLen-1; i >= 0; i--){
+	    int coordIndex = (solutionLen-1)-i;
+	    if(coordIndex % 2 == 1){
+		coordIndex --;
+	    }else{
+		coordIndex ++;
+	    }
+	    ans[i] = solution[coordIndex];
+	    System.out.println(ans[i]);
 	}
 	return ans;
     }    
@@ -38,7 +51,11 @@ public class BetterMaze{
     public String printSolution(){
 	String ans = "";
 	int[] x = solutionCoordinates();
-	return ans;
+	System.out.println(x.length);
+	for(int i = 0; i < x.length; i++){
+	    ans += x[i]+",";
+	}
+	return ans.substring(0,ans.length()-1);
     }
 
 
@@ -289,7 +306,8 @@ public class BetterMaze{
 	BetterMaze a = new BetterMaze("data1.dat");
 	//	a.setAnimate(true);
 	if(a.solveDFS()){
-	    System.out.println(a);
+	    //   System.out.println(a);
+	    System.out.println(a.printSolution());
 	}
     }
        
