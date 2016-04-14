@@ -5,6 +5,8 @@ public class BetterMaze{
 
     private char[][] maze;
     private int[]    solution;
+    private int solutionLen;
+    private Node ref;
     private int      startRow,startCol;
     private Frontier<Node> placesToGo;
     private boolean  animate;//default to false
@@ -18,12 +20,26 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
     **/
     public int[] solutionCoordinates(){
-	int[] ans = new int[solution.length];
-	for(int i = 0; i < solution.length; i++){
-	    ans[i] = solution[i];
+	solution = new int[solutionLen];
+	int[] ans = new int[solutionLen];
+	int index = 0;
+	while(ref != null){
+	    solution[index] = ref.getValue()[0];
+	    solution[index+1] = ref.getValue()[1];
+	    index+=2;
+	    ref = ref.getPrev();
+	}
+	for(int i = solutionLen-1; i < 0; i--){
+	    ans[i] = solution[(solutionLen-1)-i];
 	}
 	return ans;
     }    
+
+    public String printSolution(){
+	String ans = "";
+	int[] x = solutionCoordinates();
+	return ans;
+    }
 
 
     /**initialize the frontier as a queue and call solve
@@ -43,59 +59,60 @@ public class BetterMaze{
 
    /**Search for the end of the maze using the frontier. 
       Keep going until you find a solution or run out of elements on the frontier.
-    **/
+   **/
     private boolean solve(){  
 	int[] coord = {startRow,startCol};
-	if(solveH(coord,null)){
-	    System.out.println("true!!");
-	    return true;
-	}
-	return false;
-	//	return solveH(coord,null);
+	return solveH(coord,null);
     }    
 
 
     //solve helper function
     private boolean solveH(int[] coord, Node prev){
-	if(goal(coord)){
-	    System.out.println("yea");
-	    return true;
-	}else{
-	    //    System.out.println(coord[0]+", "+coord[1]);
-	    maze[coord[0]][coord[1]] = '.';
-	    for(int i = 0; i < 4; i++){
-		int[] newCoord;
-		// 0 = move left
-		if(i == 0){
-		    //		    System.out.println("left");
-		    newCoord = moveLeft(coord);
-		    // 1 = move right
-		}else if(i == 1){
-		    //		    System.out.println("right");
-		    newCoord = moveRight(coord);
-		    // 2 = move up
-		}else if(i == 2){
-		    //		    System.out.println("up");
-		    newCoord = moveUp(coord);
-		    // 3 = move down
-		}else{
-		    //		    System.out.println("down");
-		    newCoord = moveDown(coord);
-		}
-		//if worthy of adding
-		if(canMove(newCoord) && placesToGo != null){
-		    Node toAdd = new Node(newCoord, prev);
-		    placesToGo.add(toAdd);
-		}
+	solutionLen++;
+	//    System.out.println(coord[0]+", "+coord[1]);
+	maze[coord[0]][coord[1]] = '.';
+	for(int i = 0; i < 4; i++){
+	    int[] newCoord;
+	    // 0 = move left
+	    if(i == 0){
+		//		    System.out.println("left");
+		newCoord = moveLeft(coord);
+		// 1 = move right
+	    }else if(i == 1){
+		//		    System.out.println("right");
+		newCoord = moveRight(coord);
+		// 2 = move up
+	    }else if(i == 2){
+		//		    System.out.println("up");
+		newCoord = moveUp(coord);
+		// 3 = move down
+	    }else{
+		//		    System.out.println("down");
+		newCoord = moveDown(coord);
 	    }
-	    //next spot
-	    if(placesToGo.hasNext()){
-		Node nextSpot = placesToGo.next();
-		System.out.println(nextSpot.getValue()[0]+", "+nextSpot.getValue()[1]);
-		return solveH(nextSpot.getValue(),nextSpot);
+	    //if worthy of adding
+	    if(canMove(newCoord) && placesToGo != null){
+		Node toAdd = new Node(newCoord, prev);
+
+		if(goal(newCoord)){
+		    ref = toAdd;
+		    System.out.println("prev one" +
+				       ref.getPrev().getValue()[0] + ", "
+				       +ref.getPrev().getValue()[1]);
+		    return true;
+		}
+		placesToGo.add(toAdd);
 	    }
-	return false;
+
+
 	}
+	//next spot
+	if(placesToGo.hasNext()){
+	    Node nextSpot = placesToGo.next();
+	    System.out.println(nextSpot.getValue()[0]+", "+nextSpot.getValue()[1]);
+	    return solveH(nextSpot.getValue(),nextSpot);
+	}
+	return false;
 
     }
 
