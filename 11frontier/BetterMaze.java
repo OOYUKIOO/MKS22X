@@ -27,11 +27,13 @@ public class BetterMaze{
 	while(ref != null){
 	    solution[index] = ref.getValue()[0];
 	    solution[index+1] = ref.getValue()[1];
+	    /*
 	    if(ref.getPrev()!=null){
 		System.out.println("added " +
 				   ref.getPrev().getValue()[0] + ", "
 				   +ref.getPrev().getValue()[1]);
 	    }
+	    */
 	    index+=2;
 	    ref = ref.getPrev();
 	}
@@ -43,7 +45,6 @@ public class BetterMaze{
 		coordIndex ++;
 	    }
 	    ans[i] = solution[coordIndex];
-	    System.out.println(ans[i]);
 	}
 	return ans;
     }    
@@ -113,9 +114,11 @@ public class BetterMaze{
 
 		if(goal(newCoord)){
 		    ref = toAdd;
+		    /*
 		    System.out.println("prev one" +
 				       ref.getPrev().getValue()[0] + ", "
 				       +ref.getPrev().getValue()[1]);
+		    */
 		    return true;
 		}
 		placesToGo.add(toAdd);
@@ -126,7 +129,6 @@ public class BetterMaze{
 	//next spot
 	if(placesToGo.hasNext()){
 	    Node nextSpot = placesToGo.next();
-	    System.out.println(nextSpot.getValue()[0]+", "+nextSpot.getValue()[1]);
 	    return solveH(nextSpot.getValue(),nextSpot);
 	}
 	return false;
@@ -304,10 +306,10 @@ public class BetterMaze{
 
     public static void main(String[]args){
 	BetterMaze a = new BetterMaze("data1.dat");
-	//	a.setAnimate(true);
+	a.setAnimate(true);
 	if(a.solveDFS()){
-	    //   System.out.println(a);
-	    System.out.println(a.printSolution());
+	    System.out.println(a);
+	    //System.out.println(a.printSolution());
 	}
     }
        
