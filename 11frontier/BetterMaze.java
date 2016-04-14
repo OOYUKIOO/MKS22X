@@ -45,36 +45,44 @@ public class BetterMaze{
       Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+	int[] coord = {startRow,startCol};
+	
+        return solveH(coord,null);
     }    
 
 
     //solve helper function
-    private void solveH(int[] coord, Node prev){
+    private boolean solveH(int[] coord, Node prev){
 	if(goal(coord)){
-
+	    return true;
 	}else{
+	    System.out.println(coord[0]+", "+coord[1]);
 	    maze[coord[0]][coord[1]] = '.';
 	    for(int i = 0; i < 4; i++){
 		int[] newCoord;
 		// 0 = move left
 		if(i == 0){
+		    System.out.println("left");
 		    newCoord = moveLeft(coord);
 		    // 1 = move right
 		}else if(i == 1){
+		    System.out.println("right");
 		    newCoord = moveRight(coord);
 		    // 2 = move up
 		}else if(i == 2){
+		    System.out.println("up");
 		    newCoord = moveUp(coord);
 		    // 3 = move down
 		}else{
+		    System.out.println("down");
 		    newCoord = moveDown(coord);
 		}
 		//if worthy of adding
-		if(canMove(newCoord)){
+		if(canMove(newCoord) && placesToGo != null){
 		    Node toAdd = new Node(newCoord, prev);
 		    placesToGo.add(toAdd);
+		}else{
+		    System.out.println("pass");
 		}
 	    }
 	    //next spot
@@ -83,6 +91,8 @@ public class BetterMaze{
 		solveH(nextSpot.getValue(),nextSpot);
 	    }
 	}
+	return false;
+
     }
 
     private boolean goal(int[] coord){
@@ -256,7 +266,8 @@ public class BetterMaze{
 
     public static void main(String[]args){
 	BetterMaze a = new BetterMaze("data1.dat");
-
+	System.out.println(a);
+	System.out.println(a.solveBFS());
     }
        
     
