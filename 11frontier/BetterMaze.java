@@ -46,7 +46,12 @@ public class BetterMaze{
     **/
     private boolean solve(){  
 	int[] coord = {startRow,startCol};
-	return solveH(coord,null);
+	if(solveH(coord,null)){
+	    System.out.println("true!!");
+	    return true;
+	}
+	return false;
+	//	return solveH(coord,null);
     }    
 
 
@@ -87,7 +92,7 @@ public class BetterMaze{
 	    if(placesToGo.hasNext()){
 		Node nextSpot = placesToGo.next();
 		System.out.println(nextSpot.getValue()[0]+", "+nextSpot.getValue()[1]);
-		solveH(nextSpot.getValue(),nextSpot);
+		return solveH(nextSpot.getValue(),nextSpot);
 	    }
 	return false;
 	}
