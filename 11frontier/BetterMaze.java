@@ -51,8 +51,38 @@ public class BetterMaze{
 
 
     //solve helper function
-    private void solveH(int[] coord){
+    private void solveH(int[] coord, Node prev){
+	if(goal(coord)){
 
+	}else{
+	    maze[coord[0]][coord[1]] = '.';
+	    for(int i = 0; i < 4; i++){
+		int[] newCoord;
+		// 0 = move left
+		if(i == 0){
+		    newCoord = moveLeft(coord);
+		    // 1 = move right
+		}else if(i == 1){
+		    newCoord = moveRight(coord);
+		    // 2 = move up
+		}else if(i == 2){
+		    newCoord = moveUp(coord);
+		    // 3 = move down
+		}else{
+		    newCoord = moveDown(coord);
+		}
+		//if worthy of adding
+		if(canMove(newCoord)){
+		    Node toAdd = new Node(newCoord, prev);
+		    placesToGo.add(toAdd);
+		}
+	    }
+	    //next spot
+	    if(placesToGo.hasNext()){
+		Node nextSpot = placesToGo.next();
+		solveH(nextSpot.getValue(),nextSpot);
+	    }
+	}
     }
 
     private boolean goal(int[] coord){
