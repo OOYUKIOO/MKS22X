@@ -1,9 +1,5 @@
 public class BSTree<T extends Comparable<T>>{
 
-    public int compareTo(BSTree n){
-	return 0;
-    }
-
     Node root;
 
     private class Node{
@@ -21,6 +17,23 @@ public class BSTree<T extends Comparable<T>>{
 
 	public void add(T value){
 
+	}
+
+	public String toString(){
+	    String ans = toString(
+	    return ans;
+	}
+
+	public String toString(Node local){
+
+	}
+
+	public boolean constains(T value){
+	    return true;
+	}
+
+	public int getHeight(){
+	    return 0;
 	}
 
 
