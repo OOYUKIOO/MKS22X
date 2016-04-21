@@ -39,6 +39,12 @@ public class BSTree<T extends Comparable<T>>{
 
 	}
 
+	public void add(Node parent, T value){
+	    if(childrenNum(parent) == 0){
+		parent.setLeft(value);
+	    }
+	}
+
 
 	public int childrenNum(Node parent){
 	    int ans=0;
