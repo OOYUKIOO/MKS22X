@@ -7,12 +7,32 @@ public class BSTree<T extends Comparable<T>>{
 	Node left, right;
 	T data;
 
-	public T get(){
-	    return T;
+	public T getData(){
+	    return data;
 	}
 
-	public void set(T value){
+	public Node getLeft(){
+	    return left;
+	}
+
+	public Node getRight(){
+	    return right;
+	}
+
+	public void setData(T value){
 	    data = value;
+	}
+
+	public void setLeft(Node newTree){
+	    left = newTree;
+	}
+
+	public void setRight(Node newTree){
+	    right = newTree;
+	}
+
+	public int height(){
+	    return 0;
 	}
 
 	public void add(T value){
@@ -20,25 +40,30 @@ public class BSTree<T extends Comparable<T>>{
 	}
 
 	public String toString(){
-	    String ans = toString(
+	    String ans = toString(root);
 	    return ans;
 	}
-
+	
 	public String toString(Node local){
-
+	    String ans="";
+	    return ans;
 	}
-
-	public boolean constains(T value){
+	
+	public boolean contains(T value){
 	    return true;
 	}
+	
+    }
 
-	public int getHeight(){
-	    return 0;
+    
+    public int getHeight(){
+	if(!root.getData().equals(null)){
+	    return root.height();
 	}
-
-
+	return 0;
     }
 
 
+   
 
 }
