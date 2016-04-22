@@ -69,8 +69,13 @@ public class BSTree<T extends Comparable<T>>{
 	}
 	
 	public String toString(Node local){
-	    String ans="";
-	    return ans;
+	    if(local.left != null || local.right != null){
+		return local.getData() + " " +
+		    toString(local.getLeft())+
+		    toString(local.getRight());
+	    }else{
+		return local.getData() + " ";
+	    }
 	}
 	
 	public boolean contains(T value){
