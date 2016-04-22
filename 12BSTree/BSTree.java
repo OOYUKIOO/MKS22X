@@ -7,6 +7,10 @@ public class BSTree<T extends Comparable<T>>{
 	Node left, right;
 	T data;
 
+	public Node(T data){
+	    this.data = data;
+	}
+
 	public T getData(){
 	    return data;
 	}
@@ -32,7 +36,15 @@ public class BSTree<T extends Comparable<T>>{
 	}
 
 	public int height(){
-	    return 0;
+	    int leftH = 1;
+	    int rightH = 1;
+	    if(left!=null){
+		leftH += left.height();
+	    }
+	    if(right!=null){
+	        rightH += right.height();
+	    }
+	    return Math.max(leftH,rightH);
 	}
 
 	public void add(T value){
@@ -69,23 +81,18 @@ public class BSTree<T extends Comparable<T>>{
 
     
     public int getHeight(){
-	if(root.getData().equals(null)){
+	if(root == null){
 	    return 0;
 	}
 	return root.height();
     }
 
     public void add(T value){
-	if (getHeight() == 0){
-	    root.setData(value);
+	if (root == null){
+	    root = new Node(value);
+	}else{
+	    root.add(value);
 	}
-	
-    }
-
-
-    public String toString(){
-	String ans = root.toString();
-	return ans;
     }
 
     public boolean contains(T value){
@@ -93,5 +100,11 @@ public class BSTree<T extends Comparable<T>>{
     }
 
    
+
+    public static void main(String[]args){
+	BSTree<Integer> x = new BSTree<Integer>();
+	x.add(new Integer(1));
+	System.out.println(x.getHeight());
+    }
 
 }
