@@ -36,27 +36,21 @@ public class BSTree<T extends Comparable<T>>{
 	}
 
 	public void add(T value){
-
-	}
-
-	public void add(Node parent, T value){
-	    if(childrenNum(parent) == 0){
-		parent.setLeft(value);
+	    if(value.compareTo(data) < 0){
+		if(left == null){
+		    left.setData(value);
+		}else{
+		    left.add(value);
+		}
+	    }else if(value.compareTo(data) > 0){
+		if(right == null){
+		    right.setData(value);
+		}else{
+		    right.add(value);
+		}
 	    }
 	}
 
-
-	public int childrenNum(Node parent){
-	    int ans=0;
-	    if(!parent.getLeft().getData().equals(null)){
-		ans++;
-	    }
-	    if(!parent.getRight().getData().equals(null)){
-		ans++;
-	    }
-	    return ans;
-
-	}
 	public String toString(){
 	    String ans = toString(root);
 	    return ans;
