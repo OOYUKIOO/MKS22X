@@ -69,12 +69,16 @@ public class BSTree<T extends Comparable<T>>{
 	}
 	
 	public String toString(Node local){
-	    if(local.left != null || local.right != null){
-		return local.getData() + " " +
-		    toString(local.getLeft())+
-		    toString(local.getRight());
+	    if(local == null){
+		return "";	
 	    }else{
-		return local.getData() + " ";
+		if(local.left != null || local.right != null){
+		    return local.getData() + " " +
+			toString(local.getLeft())+
+			toString(local.getRight());
+		}else{
+		    return local.getData() + " ";
+		}
 	    }
 	}
 	
@@ -104,6 +108,9 @@ public class BSTree<T extends Comparable<T>>{
 	return root.contains(value);
     }
 
+    public String toString(){
+	return root.toString();
+    }
    
 
     public static void main(String[]args){
@@ -112,6 +119,7 @@ public class BSTree<T extends Comparable<T>>{
 	x.add(new Integer(2));
 	x.add(new Integer(3));
 	System.out.println(x.getHeight());
+	System.out.println(x.toString());
     }
 
 }
