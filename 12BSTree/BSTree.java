@@ -70,7 +70,7 @@ public class BSTree<T extends Comparable<T>>{
 	
 	public String toString(Node local){
 	    if(local == null){
-		return "";	
+		return " _ ";	
 	    }else{
 		if(local.left != null || local.right != null){
 		    return local.getData() + " " +
@@ -115,9 +115,10 @@ public class BSTree<T extends Comparable<T>>{
 
     public static void main(String[]args){
 	BSTree<Integer> x = new BSTree<Integer>();
-	x.add(new Integer(1));
+	x.add(new Integer(4));
 	x.add(new Integer(2));
 	x.add(new Integer(3));
+	x.add(new Integer(7));
 	System.out.println(x.getHeight());
 	System.out.println(x.toString());
     }
