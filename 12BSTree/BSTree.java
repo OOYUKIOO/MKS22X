@@ -50,13 +50,13 @@ public class BSTree<T extends Comparable<T>>{
 	public void add(T value){
 	    if(value.compareTo(data) < 0){
 		if(left == null){
-		    left.setData(value);
+		    left = new Node(value);
 		}else{
 		    left.add(value);
 		}
 	    }else if(value.compareTo(data) > 0){
 		if(right == null){
-		    right.setData(value);
+		    right = new Node(value);
 		}else{
 		    right.add(value);
 		}
@@ -109,6 +109,8 @@ public class BSTree<T extends Comparable<T>>{
     public static void main(String[]args){
 	BSTree<Integer> x = new BSTree<Integer>();
 	x.add(new Integer(1));
+	x.add(new Integer(2));
+	x.add(new Integer(3));
 	System.out.println(x.getHeight());
     }
 
