@@ -83,7 +83,7 @@ public class BSTree<T extends Comparable<T>>{
 	}
 	
 	public boolean contains(T value){
-	    return true;
+	    return data.equals(value);
 	}
 	
     }
@@ -105,7 +105,20 @@ public class BSTree<T extends Comparable<T>>{
     }
 
     public boolean contains(T value){
-	return root.contains(value);
+	return containsH(root, value);
+    }
+
+    public boolean containsH(Node local, T value){
+	if(local != null){
+	    if(local.contains(value)){
+		return true;
+	    }else{
+		return containsH(local.getLeft(), value) ||
+		    containsH(local.getRight(), value);
+	    }
+	}else{
+	    return false;
+	}
     }
 
     public String toString(){
@@ -121,6 +134,8 @@ public class BSTree<T extends Comparable<T>>{
 	x.add(new Integer(7));
 	System.out.println(x.getHeight());
 	System.out.println(x.toString());
+	System.out.println(x.contains(new Integer(4)));
+
     }
 
 }
