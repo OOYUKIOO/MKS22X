@@ -4,6 +4,7 @@ public class MyHeap<T extends Comparable<T>>{
 
     private T[] heap;
     private int size;
+    private boolean max;
 
     public MyHeap(){
 	//	heap = (T[])new Object[0];
@@ -19,6 +20,12 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public MyHeap(T[] array, boolean isMax){
+	heap = (T[])new Object(array.length+1);
+	size = array.length;
+	max = isMax;
+    }
+
+    private void convert(){
 
     }
 
