@@ -1,7 +1,26 @@
+import java.util.*;
+@SuppressWarnings("unchecked")
 public class MyHeap<T extends Comparable<T>>{
 
-    T[] heap;
+    private T[] heap;
+    private int size;
 
+    public MyHeap(){
+	//	heap = (T[])new Object[0];
+	//size = 0;
+    }
+
+    public MyHeap(int length){
+
+    }
+
+    public MyHeap(T[] array){
+
+    }
+
+    public MyHeap(T[] array, boolean isMax){
+
+    }
 
     private void pushUp(int index){
 	T child = heap[index];
