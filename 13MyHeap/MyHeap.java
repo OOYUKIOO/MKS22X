@@ -31,7 +31,17 @@ public class MyHeap<T extends Comparable<T>>{
     private void heapify(){
 	int len = heap.length;
 	int start = len/4;
-	int end = (len-1)/2;
+	int end = len/2;
+	while(start < end){
+	    heapify(start);
+	    if(start == end - 1){
+		len = end;
+		start = len/4;
+		end = len/2;
+	    }else{
+		start++;
+	    }
+	}
 
     }
 
