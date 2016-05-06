@@ -20,13 +20,33 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public MyHeap(T[] array, boolean isMax){
-	heap = (T[])new Object(array.length+1);
+	heap = (T[])new Object[array.length+1];
+	for(int i = 1; i<heap.length; i++){
+	    heap[i] = array[i-1];
+	}
 	size = array.length;
 	max = isMax;
     }
 
-    private void convert(){
+    private void heapify(){
+	int len = heap.length;
+	int start = len/4;
+	int end = (len-1)/2;
 
+    }
+
+    private void heapify(int index){
+	if((index * 2) < (heap.length)){
+	    if(heap[index].compareTo(heap[index*2]) < 0){
+		int newIndex = index*2;
+		pushDown(index,0);
+		heapify(newIndex);
+	    }else if(heap[index].compareTo(heap[index*2+1]) < 0){
+		int newIndex = index*2+1;
+		pushDown(index,1);
+		heapify(newIndex);
+	    }
+	}
     }
 
     private void pushUp(int index){
