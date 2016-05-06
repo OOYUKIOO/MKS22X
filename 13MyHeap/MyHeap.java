@@ -26,6 +26,7 @@ public class MyHeap<T extends Comparable<T>>{
 	}
 	size = array.length;
 	max = isMax;
+	heapify();
     }
 
     private void heapify(){
@@ -72,5 +73,12 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
 
+    public static void main(String[]args){
+	Integer[] x = new Integer[5];
+	for (Integer num : x){
+	    num = new Integer((int)Math.random()*10);
+	}
+	MyHeap<Integer> h = new MyHeap<Integer>(x, true);
+    }
 
 }
