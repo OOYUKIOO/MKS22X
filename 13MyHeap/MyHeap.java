@@ -7,18 +7,22 @@ public class MyHeap<T extends Comparable<T>>{
     private boolean max;
 
     public MyHeap(){
-	//	heap = (T[])new Object[0];
-	//size = 0;
+	heap = (T[])new Comparable[1];
+	size = 0;
     }
 
-    public MyHeap(int length){
-
-    }
 
     public MyHeap(T[] array){
-
+	heap = (T[])new Comparable[array.length + 1];
+	size = array.length;
+	for(int i = 1; i < heap.length; i++){
+	    heap[i] = (array[i-1]);
+	    System.out.println(array[i-1] + "," + heap[i]);
+	}
+	//	heapify();
     }
 
+    /*
     public MyHeap(T[] array, boolean isMax){
 	heap = (T[])new Object[array.length+1];
 	for(int i = 1; i<heap.length; i++){
@@ -28,6 +32,7 @@ public class MyHeap<T extends Comparable<T>>{
 	max = isMax;
 	heapify();
     }
+    */
 
     private void heapify(){
 	int len = heap.length;
@@ -72,13 +77,28 @@ public class MyHeap<T extends Comparable<T>>{
 	heap[index*2+shift] = parent;
     }
 
+    public String toString(){
+	String ans = "";
+	for(T item : heap){
+	    if(item == null){
+		ans += "_ ";
+	    }else{
+		ans += item+" ";
+	    }
+	}
+	return ans;
+    }
+
 
     public static void main(String[]args){
-	Integer[] x = new Integer[5];
-	for (Integer num : x){
-	    num = new Integer((int)Math.random()*10);
+	Integer [] x = new Integer[5];
+	
+	for(int i = 0; i < x.length; i++){
+	    x[i] = new Integer(i);
 	}
-	MyHeap<Integer> h = new MyHeap<Integer>(x, true);
+	
+	MyHeap<Integer> h = new MyHeap<Integer>(x);
+	System.out.println(h);
     }
 
 }
