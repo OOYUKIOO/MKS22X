@@ -68,17 +68,6 @@ public class MyHeap<T extends Comparable<T>>{
 
 		heapify(newIndex);
 	    }
-	    /*
-	    else if(heap[index].compareTo(heap[index*2+1]) < 0){
-		int newIndex = index*2+1;
-		pushDown(index,1);
-
-		System.out.println("child index:" + index + ", " +
-				   "parent index:" + newIndex);
-
-		heapify(newIndex);
-	    }
-	    */
 	}
     }
 
@@ -106,6 +95,14 @@ public class MyHeap<T extends Comparable<T>>{
 	return height;
     }
 
+    private void doubleSize(){
+	T[] newHeap = (T[])new Comparable[heap.length*2];
+	for(int i = 0; i<heap.length; i++){
+	    newHeap[i] = heap[i];
+	}
+	heap = newHeap;
+    }
+
     public String toString(){
 	String ans = "";
 	for(T item : heap){
@@ -129,7 +126,7 @@ public class MyHeap<T extends Comparable<T>>{
 	MyHeap<Integer> h = new MyHeap<Integer>(x);
 	System.out.println(h);
 	System.out.println(h.height());
-	System.out.println(Math.log(16));
+
     }
 
 }
