@@ -6,33 +6,47 @@ public class MyHeap<T extends Comparable<T>>{
     private int size;
     private boolean max;
 
+    public int compare(int first, int second){
+	if(max){
+	    return heap[first].compareTo(heap[second]);
+	}else{
+	    return (-1)*(heap[first].compareTo(heap[second]));
+	}
+    }
+    
+    
     public MyHeap(){
 	heap = (T[])new Comparable[1];
+	max = true;
 	size = 0;
     }
 
 
     public MyHeap(T[] array){
 	heap = (T[])new Comparable[array.length + 1];
-	size = array.length;
 	for(int i = 1; i < heap.length; i++){
-	    heap[i] = (array[i-1]);
-	    System.out.println(array[i-1] + "," + heap[i]);
+	    heap[i] = array[i-1];
 	}
+	max = true;
+	size = array.length;
 	heapify();
     }
 
-    /*
+    public MyHeap(boolean isMax){
+	this();
+	max = isMax;
+    }
+    
     public MyHeap(T[] array, boolean isMax){
-	heap = (T[])new Object[array.length+1];
-	for(int i = 1; i<heap.length; i++){
+	heap = (T[])new Comparable[array.length + 1];
+	for(int i = 1; i < heap.length; i++){
 	    heap[i] = array[i-1];
 	}
-	size = array.length;
 	max = isMax;
+	size = array.length;
 	heapify();
+	
     }
-    */
 
     private void heapify(){
 	int len = (int)Math.pow(2,height());
@@ -53,14 +67,11 @@ public class MyHeap<T extends Comparable<T>>{
 
     private void heapify(int index){
 	if(heap[index] != null){
-	    // To sort entire heap(array to heap)
-	    // OR 
-	    // From the top(delete)
 	    int newIndex;	
 	    if((index * 2 + 1) <= size){
-		if(heap[index].compareTo(heap[index*2]) < 0 ||
-		   heap[index].compareTo(heap[index*2]) < 0){
-		    if(heap[index*2].compareTo(heap[index*2+1]) < 0){
+		if(compare(index,index*2) < 0 ||
+		   compare(index,index*2+1) < 0){
+		    if(compare(index*2,index*2+1) < 0){
 			newIndex = index*2+1;
 		    }else{
 			newIndex = index*2;
@@ -69,12 +80,12 @@ public class MyHeap<T extends Comparable<T>>{
 		    heapify(newIndex);
 		}
 	    }else if((index * 2) <= size &&
-		     heap[index].compareTo(heap[index*2]) < 0){
+		     compare(index,index*2) < 0){
 		newIndex = index*2;
 		pushDown(index,0);
 		heapify(newIndex);
 	    }else if(index > 1 &&
-		     heap[index].compareTo(heap[index/2]) > 0){
+		     compare(index,index/2) > 0){
 		pushUp(index);
 		heapify(index/2);
 	    }
@@ -94,6 +105,9 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public int height(){
+	if(heap.length == 1){
+	    return 0;
+	}
 	double decHeight = Math.log(size);
 	int height = (int)decHeight;
 	double round = 0.5;
@@ -152,12 +166,15 @@ public class MyHeap<T extends Comparable<T>>{
 	    x[i] = new Integer(i);
 	}
 	
-	MyHeap<Integer> h = new MyHeap<Integer>(x);
+	MyHeap<Integer> h = new MyHeap<Integer>(x,false);
 	System.out.println(h);
-	System.out.println(h.height());
 	h.add(new Integer(5));
+	h.add(new Integer(2));
+	h.add(new Integer(8));
 	System.out.println(h);
 	h.delete();
+	System.out.println(h);
+	h.add(new Integer(7));
 	System.out.println(h);
     }
 
