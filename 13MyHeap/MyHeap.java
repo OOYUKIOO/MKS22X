@@ -53,21 +53,23 @@ public class MyHeap<T extends Comparable<T>>{
 
     private void heapify(int index){
 	if((index * 2) < heap.length && heap[index] != null){
+	    int newIndex;	
 	    if(heap[index].compareTo(heap[index*2]) < 0){
-		   int newIndex;
     		if(heap[index].compareTo(heap[index*2+1]) < 0 &&
 		   heap[index*2+1].compareTo(heap[index*2]) > 0){
 		    newIndex = index*2 + 1;
 		}else{
 		    newIndex = index*2;
 		}
-		pushDown(index,index*2-newIndex);
+		pushDown(index,newIndex-index*2);
 
 		System.out.println("parent index:" + index + ", " +
 				   "child index:" + newIndex);
 
 		heapify(newIndex);
-	    }else if(heap[index].compareTo(heap[index*2+1]) < 0){
+	    }
+	    /*
+	    else if(heap[index].compareTo(heap[index*2+1]) < 0){
 		int newIndex = index*2+1;
 		pushDown(index,1);
 
@@ -76,6 +78,7 @@ public class MyHeap<T extends Comparable<T>>{
 
 		heapify(newIndex);
 	    }
+	    */
 	}
     }
 
