@@ -57,25 +57,30 @@ public class MyHeap<T extends Comparable<T>>{
 	    // OR 
 	    // From the top(delete)
 	    int newIndex;	
-	    if((index * 2) <= size &&
-	       heap[index].compareTo(heap[index*2]) < 0){
+	    if((index * 2 + 1) <= size){
+		if(heap[index].compareTo(heap[index*2]) < 0 ||
+		   heap[index].compareTo(heap[index*2]) < 0){
+		    if(heap[index*2].compareTo(heap[index*2+1]) < 0){
+			newIndex = index*2+1;
+		    }else{
+			newIndex = index*2;
+		    }
+		    pushDown(index,newIndex-index*2);
+		    heapify(newIndex);
+		}
+	    }else if((index * 2) <= size &&
+		     heap[index].compareTo(heap[index*2]) < 0){
 		newIndex = index*2;
 		pushDown(index,0);
-		heapify(newIndex);
-	    }else if((index * 2 + 1) <= size &&
-		     heap[index].compareTo(heap[index*2+1]) < 0){
-		newIndex = index*2+1;
-		pushDown(index,1);
 		heapify(newIndex);
 	    }else if(index > 1 &&
 		     heap[index].compareTo(heap[index/2]) > 0){
 		pushUp(index);
 		heapify(index/2);
 	    }
-	    // To sort from bottom(add)
 	}
     }
-
+    
     private void pushUp(int index){
 	T child = heap[index];
 	heap[index] = heap[index/2];
