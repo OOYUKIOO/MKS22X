@@ -52,22 +52,27 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     private void heapify(int index){
-	if((index * 2) < heap.length && heap[index] != null){
+	if(heap[index] != null){
+	    // To sort entire heap(array to heap)
+	    // OR 
+	    // From the top(delete)
 	    int newIndex;	
-	    if(heap[index].compareTo(heap[index*2]) < 0){
-    		if(heap[index].compareTo(heap[index*2+1]) < 0 &&
-		   heap[index*2+1].compareTo(heap[index*2]) > 0){
-		    newIndex = index*2 + 1;
-		}else{
-		    newIndex = index*2;
-		}
-		pushDown(index,newIndex-index*2);
-
-		System.out.println("parent index:" + index + ", " +
-				   "child index:" + newIndex);
-
+	    if((index * 2) <= size &&
+	       heap[index].compareTo(heap[index*2]) < 0){
+		newIndex = index*2;
+		pushDown(index,0);
 		heapify(newIndex);
+	    }else if((index * 2 + 1) <= size &&
+		     heap[index].compareTo(heap[index*2+1]) < 0){
+		newIndex = index*2+1;
+		pushDown(index,1);
+		heapify(newIndex);
+	    }else if(index > 1 &&
+		     heap[index].compareTo(heap[index/2]) > 0){
+		pushUp(index);
+		heapify(index/2);
 	    }
+	    // To sort from bottom(add)
 	}
     }
 
@@ -103,6 +108,25 @@ public class MyHeap<T extends Comparable<T>>{
 	heap = newHeap;
     }
 
+    public void add(T item){
+	int index = size+1;
+	if(index >= heap.length){
+	    doubleSize();
+	}
+	heap[index] = item;
+	size += 1;
+	heapify(index);
+    }
+
+    public T delete(){
+	T ans = heap[1];
+	heap[1] = heap[size];
+	heap[size] = null;
+	size -= 1;
+	heapify(1);
+	return ans;
+    }
+
     public String toString(){
 	String ans = "";
 	for(T item : heap){
@@ -126,7 +150,10 @@ public class MyHeap<T extends Comparable<T>>{
 	MyHeap<Integer> h = new MyHeap<Integer>(x);
 	System.out.println(h);
 	System.out.println(h.height());
-
+	h.add(new Integer(5));
+	System.out.println(h);
+	h.delete();
+	System.out.println(h);
     }
 
 }
