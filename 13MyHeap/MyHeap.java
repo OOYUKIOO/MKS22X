@@ -137,7 +137,17 @@ public class MyHeap<T extends Comparable<T>>{
 	heapify(index);
     }
 
+    public T peek(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return heap[1];
+    }
+
     public T delete(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
 	T ans = heap[1];
 	heap[1] = heap[size];
 	heap[size] = null;
@@ -175,6 +185,14 @@ public class MyHeap<T extends Comparable<T>>{
 	System.out.println(h);
 	h.add(new Integer(7));
 	System.out.println(h);
+	System.out.println(h.peek());
+
+	MyHeap<Integer> empty = new MyHeap<Integer>();
+	try{
+	    empty.peek();
+	}catch(NoSuchElementException e){
+	    System.out.println("caught");
+	}
     }
 
 }
