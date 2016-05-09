@@ -150,7 +150,6 @@ public class MyHeap<T extends Comparable<T>>{
 	String ans = "";
 	for(T item : heap){
 	    if(item == null){
-		ans += "_ ";
 	    }else{
 		ans += item+" ";
 	    }
