@@ -157,20 +157,19 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public String toString(){
-	String ans = "";
+	String ans = "[ ";
 	for(T item : heap){
 	    if(item == null){
 	    }else{
 		ans += item+" ";
 	    }
 	}
-	return ans;
+	return ans+"]";
     }
 
 
     public static void main(String[]args){
 	Integer [] x = new Integer[5];
-	
 	for(int i = 0; i < x.length; i++){
 	    x[i] = new Integer(i);
 	}
