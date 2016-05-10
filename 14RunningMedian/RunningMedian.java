@@ -25,11 +25,36 @@ public class RunningMedian{
     }
 
     public void add(Integer x){
-
+	double med = getMedian();
 	if(maxHeap.getSize() == minHeap.getSize()){
-
+	    if(x <= med){
+		maxHeap.add(x);
+	    }else{
+		minHeap.add(x);
+	    }
+	}else if(maxHeap.getSize() > minHeap.getSize()){
+	    if(x >= med){
+		minHeap.add(x);
+	    }else{
+		Integer moveOver = maxHeap.delete();
+		maxHeap.add(x);
+		minHeap.add(moveOver);
+	    }
+	}else{
+	    if(x <= med){
+		maxHeap.add(x);
+	    }else{
+		Integer moveOver = minHeap.delete();
+		minHeap.add(x);
+		maxHeap.add(moveOver);
+	    }
 	}
     }
 
+    public String toString(){
+	String ans="";
+	return ans;
+
+    }
 
 }
